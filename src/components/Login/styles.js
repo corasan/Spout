@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { BACKGROUND_GRAY, MAIN, IOS_FONT, TINT } from '../../ui/theme'
+// import { BACKGROUND_GRAY, MAIN, IOS_FONT, TINT } from '../../ui/theme'
 
 const { width } = Dimensions.get('window')
 
@@ -25,12 +25,12 @@ export default StyleSheet.create({
   },
   input: {
     height: 44,
-    backgroundColor: BACKGROUND_GRAY,
+    // backgroundColor: BACKGROUND_GRAY,
     borderRadius: 4,
     marginVertical: 8,
     paddingHorizontal: 8,
-    fontFamily: IOS_FONT,
-    color: TINT,
+    // fontFamily: IOS_FONT,
+    // color: TINT,
   },
   forgotContainer: {
     alignItems: 'flex-end',
@@ -39,28 +39,28 @@ export default StyleSheet.create({
   },
   forgotText: {
     fontSize: 14,
-    color: MAIN,
-    fontFamily: IOS_FONT,
+    // color: MAIN,
+    // fontFamily: IOS_FONT,
   },
   loginBtnContainer: {
     paddingHorizontal: 18,
     marginTop: 40,
   },
   loginBtn: {
-    backgroundColor: MAIN,
+    // backgroundColor: MAIN,
     alignItems: 'center',
     paddingVertical: 9,
     borderRadius: 4,
   },
   loginBtnText: {
     color: '#FFF',
-    fontFamily: IOS_FONT,
+    // fontFamily: IOS_FONT,
     fontSize: 20,
   },
   signupBtnText: {
     fontSize: 22,
     color: '#FFF',
     backgroundColor: 'transparent',
-    fontFamily: IOS_FONT,
+    // fontFamily: IOS_FONT,
   },
 })
