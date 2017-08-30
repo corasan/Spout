@@ -7,8 +7,8 @@ import { BACKGROUND_GRAY, TINT } from './ui/theme'
 
 import Login from './components/Login'
 // import Signup from './components/Signup/'
-// import Feed from './components/Feed'
-// import Main from './components/Main'
+import Feed from './components/Feed'
+import Main from './components/Main'
 // import CreatePost from './Components/CreatePost'
 
 
@@ -60,7 +60,7 @@ class Routes extends Component {
       <Router navigationBarStyle={styles.navBar} titleStyle={styles.title}>
         <Scene key="root">
           <Scene key="login" component={Login} hideNavBar />
-          {/* <Scene key="signup" component={Signup} hideNavBar />
+          {/* <Scene key="signup" component={Signup} hideNavBar /> */}
           <Scene
             key="main"
             component={Main}
@@ -68,10 +68,10 @@ class Routes extends Component {
             title="Feed"
             titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, fontSize: 24, marginBottom: 2 }}
             hideBackImage
-            renderRightButton={() => this.renderRightButton()}
+            // renderRightButton={() => this.renderRightButton()}
             sceneStyle={styles.appBackground}
           />
-          <Scene key="createPost" component={CreatePost} hideNavBar direction="vertical" /> */}
+          {/* <Scene key="createPost" component={CreatePost} hideNavBar direction="vertical" /> */}
         </Scene>
       </Router>
     )

@@ -33,6 +33,7 @@ class Login extends Component {
 
   login = () => {
     const { email, password } = this.state
+    Actions.main()
     // SigninUser(email, password, (uid, token) => {
     //   this.saveUserData(uid, token)
     //   Actions.feed()
