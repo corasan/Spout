@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Router, Scene, Actions } from 'react-native-router-flux'
-// import { BACKGROUND_GRAY, TINT } from './ui/theme'
+import { BACKGROUND_GRAY, TINT } from './ui/theme'
 // import { CreatePostIcon } from './ui/icons'
 
 import Login from './components/Login'
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   appBackground: {
-    // backgroundColor: BACKGROUND_GRAY,
+    backgroundColor: BACKGROUND_GRAY,
   },
 })
 
