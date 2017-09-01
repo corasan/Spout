@@ -1,0 +1,2121 @@
+input AddToAgreeOnPostAgreeInput {
+  postPostId: ID!
+  agreesAgreeId: ID!
+  clientMutationId: String!
+}
+
+type AddToAgreeOnPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agreesAgree: Agree
+  postPost: Post
+  agreesAgreeEdge: AgreeEdge
+  postPostEdge: PostEdge
+}
+
+input AddToAgreeOnUserAgreeInput {
+  userUserId: ID!
+  agreesAgreeId: ID!
+  clientMutationId: String!
+}
+
+type AddToAgreeOnUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agreesAgree: Agree
+  userUser: User
+  agreesAgreeEdge: AgreeEdge
+  userUserEdge: UserEdge
+}
+
+input AddToDisagreeOnPostDisagreeInput {
+  postPostId: ID!
+  disagreesDisagreeId: ID!
+  clientMutationId: String!
+}
+
+type AddToDisagreeOnPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagreesDisagree: Disagree
+  postPost: Post
+  disagreesDisagreeEdge: DisagreeEdge
+  postPostEdge: PostEdge
+}
+
+input AddToDisagreeOnUserDisagreeInput {
+  userUserId: ID!
+  disagreesDisagreeId: ID!
+  clientMutationId: String!
+}
+
+type AddToDisagreeOnUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagreesDisagree: Disagree
+  userUser: User
+  disagreesDisagreeEdge: DisagreeEdge
+  userUserEdge: UserEdge
+}
+
+type AddToSavedPostOnUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  savedPostsSavedPost: SavedPost
+  userUser: User
+  savedPostsSavedPostEdge: SavedPostEdge
+  userUserEdge: UserEdge
+}
+
+input AddToSavedPostOnUserSavedPostInput {
+  userUserId: ID!
+  savedPostsSavedPostId: ID!
+  clientMutationId: String!
+}
+
+type AddToUserOnPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  postsPost: Post
+  authorUser: User
+  postsPostEdge: PostEdge
+  authorUserEdge: UserEdge
+}
+
+input AddToUserOnPostPostInput {
+  authorUserId: ID!
+  postsPostId: ID!
+  clientMutationId: String!
+}
+
+type Agree implements Node {
+  createdAt: DateTime!
+  id: ID!
+  post(filter: PostFilter): Post
+  updatedAt: DateTime!
+  user(filter: UserFilter): User
+}
+
+# A connection to a list of items.
+type AgreeConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AgreeEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type AgreeEdge {
+  # The item at the end of the edge.
+  node: Agree!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input AgreeFilter {
+  # Logical AND on all given filters.
+  AND: [AgreeFilter!]
+
+  # Logical OR on all given filters.
+  OR: [AgreeFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  post: PostFilter
+  user: UserFilter
+}
+
+enum AgreeOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input AgreepostPost {
+  content: String!
+  authorId: ID
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+}
+
+input AUTH_PROVIDER_EMAIL {
+  email: String!
+  password: String!
+}
+
+input AuthProviderSignupData {
+  email: AUTH_PROVIDER_EMAIL
+}
+
+input CreateAgree {
+  postId: ID
+  post: AgreepostPost
+  userId: ID
+}
+
+input CreateAgreeInput {
+  postId: ID
+  post: AgreepostPost
+  userId: ID
+  clientMutationId: String!
+}
+
+type CreateAgreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agree: Agree
+  edge: AgreeEdge
+  post: Post
+  user: User
+}
+
+input CreateDisagree {
+  postId: ID
+  post: DisagreepostPost
+  userId: ID
+}
+
+input CreateDisagreeInput {
+  postId: ID
+  post: DisagreepostPost
+  userId: ID
+  clientMutationId: String!
+}
+
+type CreateDisagreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagree: Disagree
+  edge: DisagreeEdge
+  post: Post
+  user: User
+}
+
+input CreateFile {
+  name: String!
+}
+
+input CreateFileInput {
+  name: String!
+  clientMutationId: String!
+}
+
+type CreateFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+}
+
+input CreatePost {
+  content: String!
+  authorId: ID
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+}
+
+input CreatePostInput {
+  content: String!
+  authorId: ID
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+  clientMutationId: String!
+}
+
+type CreatePostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  post: Post
+  edge: PostEdge
+  author: User
+}
+
+input CreateSavedPost {
+  postId: String!
+  userId: ID
+}
+
+input CreateSavedPostInput {
+  postId: String!
+  userId: ID
+  clientMutationId: String!
+}
+
+type CreateSavedPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  savedPost: SavedPost
+  edge: SavedPostEdge
+  user: User
+}
+
+input CreateUser {
+  firstname: String!
+  influence: Int
+  lastname: String!
+  username: String!
+  agreesIds: [ID!]
+  agrees: [UseragreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [UserdisagreesDisagree!]
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
+  savedPostsIds: [ID!]
+  savedPosts: [UsersavedPostsSavedPost!]
+}
+
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+scalar DateTime
+
+input DeleteAgreeInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteAgreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agree: Agree
+  edge: AgreeEdge
+  post: Post
+  user: User
+  deletedId: ID
+}
+
+input DeleteDisagreeInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteDisagreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagree: Disagree
+  edge: DisagreeEdge
+  post: Post
+  user: User
+  deletedId: ID
+}
+
+input DeleteFileInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+  deletedId: ID
+}
+
+input DeletePostInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeletePostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  post: Post
+  edge: PostEdge
+  author: User
+  deletedId: ID
+}
+
+input DeleteSavedPostInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteSavedPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  savedPost: SavedPost
+  edge: SavedPostEdge
+  user: User
+  deletedId: ID
+}
+
+input DeleteUserInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+  deletedId: ID
+}
+
+type Disagree implements Node {
+  createdAt: DateTime!
+  id: ID!
+  post(filter: PostFilter): Post
+  updatedAt: DateTime!
+  user(filter: UserFilter): User
+}
+
+# A connection to a list of items.
+type DisagreeConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [DisagreeEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type DisagreeEdge {
+  # The item at the end of the edge.
+  node: Disagree!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input DisagreeFilter {
+  # Logical AND on all given filters.
+  AND: [DisagreeFilter!]
+
+  # Logical OR on all given filters.
+  OR: [DisagreeFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  post: PostFilter
+  user: UserFilter
+}
+
+enum DisagreeOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input DisagreepostPost {
+  content: String!
+  authorId: ID
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+}
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  secret: String!
+  size: Int!
+  updatedAt: DateTime!
+  url: String!
+}
+
+# A connection to a list of items.
+type FileConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [FileEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type FileEdge {
+  # The item at the end of the edge.
+  node: File!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input FileFilter {
+  # Logical AND on all given filters.
+  AND: [FileFilter!]
+
+  # Logical OR on all given filters.
+  OR: [FileFilter!]
+  contentType: String
+
+  # All values that are not equal to given value.
+  contentType_not: String
+
+  # All values that are contained in given list.
+  contentType_in: [String!]
+
+  # All values that are not contained in given list.
+  contentType_not_in: [String!]
+
+  # All values less than the given value.
+  contentType_lt: String
+
+  # All values less than or equal the given value.
+  contentType_lte: String
+
+  # All values greater than the given value.
+  contentType_gt: String
+
+  # All values greater than or equal the given value.
+  contentType_gte: String
+
+  # All values containing the given string.
+  contentType_contains: String
+
+  # All values not containing the given string.
+  contentType_not_contains: String
+
+  # All values starting with the given string.
+  contentType_starts_with: String
+
+  # All values not starting with the given string.
+  contentType_not_starts_with: String
+
+  # All values ending with the given string.
+  contentType_ends_with: String
+
+  # All values not ending with the given string.
+  contentType_not_ends_with: String
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  secret: String
+
+  # All values that are not equal to given value.
+  secret_not: String
+
+  # All values that are contained in given list.
+  secret_in: [String!]
+
+  # All values that are not contained in given list.
+  secret_not_in: [String!]
+
+  # All values less than the given value.
+  secret_lt: String
+
+  # All values less than or equal the given value.
+  secret_lte: String
+
+  # All values greater than the given value.
+  secret_gt: String
+
+  # All values greater than or equal the given value.
+  secret_gte: String
+
+  # All values containing the given string.
+  secret_contains: String
+
+  # All values not containing the given string.
+  secret_not_contains: String
+
+  # All values starting with the given string.
+  secret_starts_with: String
+
+  # All values not starting with the given string.
+  secret_not_starts_with: String
+
+  # All values ending with the given string.
+  secret_ends_with: String
+
+  # All values not ending with the given string.
+  secret_not_ends_with: String
+  size: Int
+
+  # All values that are not equal to given value.
+  size_not: Int
+
+  # All values that are contained in given list.
+  size_in: [Int!]
+
+  # All values that are not contained in given list.
+  size_not_in: [Int!]
+
+  # All values less than the given value.
+  size_lt: Int
+
+  # All values less than or equal the given value.
+  size_lte: Int
+
+  # All values greater than the given value.
+  size_gt: Int
+
+  # All values greater than or equal the given value.
+  size_gte: Int
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  url: String
+
+  # All values that are not equal to given value.
+  url_not: String
+
+  # All values that are contained in given list.
+  url_in: [String!]
+
+  # All values that are not contained in given list.
+  url_not_in: [String!]
+
+  # All values less than the given value.
+  url_lt: String
+
+  # All values less than or equal the given value.
+  url_lte: String
+
+  # All values greater than the given value.
+  url_gt: String
+
+  # All values greater than or equal the given value.
+  url_gte: String
+
+  # All values containing the given string.
+  url_contains: String
+
+  # All values not containing the given string.
+  url_not_contains: String
+
+  # All values starting with the given string.
+  url_starts_with: String
+
+  # All values not starting with the given string.
+  url_not_starts_with: String
+
+  # All values ending with the given string.
+  url_ends_with: String
+
+  # All values not ending with the given string.
+  url_not_ends_with: String
+}
+
+enum FileOrderBy {
+  contentType_ASC
+  contentType_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  secret_ASC
+  secret_DESC
+  size_ASC
+  size_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+type Mutation {
+  createAgree(input: CreateAgreeInput!): CreateAgreePayload
+  createDisagree(input: CreateDisagreeInput!): CreateDisagreePayload
+  createFile(input: CreateFileInput!): CreateFilePayload
+  createPost(input: CreatePostInput!): CreatePostPayload
+  createSavedPost(input: CreateSavedPostInput!): CreateSavedPostPayload
+  updateAgree(input: UpdateAgreeInput!): UpdateAgreePayload
+  updateDisagree(input: UpdateDisagreeInput!): UpdateDisagreePayload
+  updateFile(input: UpdateFileInput!): UpdateFilePayload
+  updatePost(input: UpdatePostInput!): UpdatePostPayload
+  updateSavedPost(input: UpdateSavedPostInput!): UpdateSavedPostPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateAgree(input: UpdateOrCreateAgreeInput!): UpdateOrCreateAgreePayload
+  updateOrCreateDisagree(input: UpdateOrCreateDisagreeInput!): UpdateOrCreateDisagreePayload
+  updateOrCreateFile(input: UpdateOrCreateFileInput!): UpdateOrCreateFilePayload
+  updateOrCreatePost(input: UpdateOrCreatePostInput!): UpdateOrCreatePostPayload
+  updateOrCreateSavedPost(input: UpdateOrCreateSavedPostInput!): UpdateOrCreateSavedPostPayload
+  updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteAgree(input: DeleteAgreeInput!): DeleteAgreePayload
+  deleteDisagree(input: DeleteDisagreeInput!): DeleteDisagreePayload
+  deleteFile(input: DeleteFileInput!): DeleteFilePayload
+  deletePost(input: DeletePostInput!): DeletePostPayload
+  deleteSavedPost(input: DeleteSavedPostInput!): DeleteSavedPostPayload
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  addToAgreeOnPost(input: AddToAgreeOnPostAgreeInput!): AddToAgreeOnPostPayload
+  addToAgreeOnUser(input: AddToAgreeOnUserAgreeInput!): AddToAgreeOnUserPayload
+  addToDisagreeOnPost(input: AddToDisagreeOnPostDisagreeInput!): AddToDisagreeOnPostPayload
+  addToDisagreeOnUser(input: AddToDisagreeOnUserDisagreeInput!): AddToDisagreeOnUserPayload
+  addToSavedPostOnUser(input: AddToSavedPostOnUserSavedPostInput!): AddToSavedPostOnUserPayload
+  addToUserOnPost(input: AddToUserOnPostPostInput!): AddToUserOnPostPayload
+  removeFromAgreeOnPost(input: RemoveFromAgreeOnPostAgreeInput!): RemoveFromAgreeOnPostPayload
+  removeFromAgreeOnUser(input: RemoveFromAgreeOnUserAgreeInput!): RemoveFromAgreeOnUserPayload
+  removeFromDisagreeOnPost(input: RemoveFromDisagreeOnPostDisagreeInput!): RemoveFromDisagreeOnPostPayload
+  removeFromDisagreeOnUser(input: RemoveFromDisagreeOnUserDisagreeInput!): RemoveFromDisagreeOnUserPayload
+  removeFromSavedPostOnUser(input: RemoveFromSavedPostOnUserSavedPostInput!): RemoveFromSavedPostOnUserPayload
+  signinUser(input: SigninUserInput!): SigninPayload!
+  createUser(input: SignupUserInput!): CreateUserPayload!
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Post implements Node {
+  agrees(filter: AgreeFilter, orderBy: AgreeOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AgreeConnection
+  author(filter: UserFilter): User!
+  content: String!
+  createdAt: DateTime!
+  disagrees(filter: DisagreeFilter, orderBy: DisagreeOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): DisagreeConnection
+  id: ID!
+  updatedAt: DateTime!
+}
+
+input PostagreesAgree {
+  userId: ID
+}
+
+# A connection to a list of items.
+type PostConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [PostEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+input PostdisagreesDisagree {
+  userId: ID
+}
+
+# An edge in a connection.
+type PostEdge {
+  # The item at the end of the edge.
+  node: Post!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input PostFilter {
+  # Logical AND on all given filters.
+  AND: [PostFilter!]
+
+  # Logical OR on all given filters.
+  OR: [PostFilter!]
+  content: String
+
+  # All values that are not equal to given value.
+  content_not: String
+
+  # All values that are contained in given list.
+  content_in: [String!]
+
+  # All values that are not contained in given list.
+  content_not_in: [String!]
+
+  # All values less than the given value.
+  content_lt: String
+
+  # All values less than or equal the given value.
+  content_lte: String
+
+  # All values greater than the given value.
+  content_gt: String
+
+  # All values greater than or equal the given value.
+  content_gte: String
+
+  # All values containing the given string.
+  content_contains: String
+
+  # All values not containing the given string.
+  content_not_contains: String
+
+  # All values starting with the given string.
+  content_starts_with: String
+
+  # All values not starting with the given string.
+  content_not_starts_with: String
+
+  # All values ending with the given string.
+  content_ends_with: String
+
+  # All values not ending with the given string.
+  content_not_ends_with: String
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  agrees_every: AgreeFilter
+  agrees_some: AgreeFilter
+  agrees_none: AgreeFilter
+  author: UserFilter
+  disagrees_every: DisagreeFilter
+  disagrees_some: DisagreeFilter
+  disagrees_none: DisagreeFilter
+}
+
+enum PostOrderBy {
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+input RemoveFromAgreeOnPostAgreeInput {
+  postPostId: ID!
+  agreesAgreeId: ID!
+  clientMutationId: String!
+}
+
+type RemoveFromAgreeOnPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agreesAgree: Agree
+  postPost: Post
+  agreesAgreeEdge: AgreeEdge
+  postPostEdge: PostEdge
+}
+
+input RemoveFromAgreeOnUserAgreeInput {
+  userUserId: ID!
+  agreesAgreeId: ID!
+  clientMutationId: String!
+}
+
+type RemoveFromAgreeOnUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agreesAgree: Agree
+  userUser: User
+  agreesAgreeEdge: AgreeEdge
+  userUserEdge: UserEdge
+}
+
+input RemoveFromDisagreeOnPostDisagreeInput {
+  postPostId: ID!
+  disagreesDisagreeId: ID!
+  clientMutationId: String!
+}
+
+type RemoveFromDisagreeOnPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagreesDisagree: Disagree
+  postPost: Post
+  disagreesDisagreeEdge: DisagreeEdge
+  postPostEdge: PostEdge
+}
+
+input RemoveFromDisagreeOnUserDisagreeInput {
+  userUserId: ID!
+  disagreesDisagreeId: ID!
+  clientMutationId: String!
+}
+
+type RemoveFromDisagreeOnUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagreesDisagree: Disagree
+  userUser: User
+  disagreesDisagreeEdge: DisagreeEdge
+  userUserEdge: UserEdge
+}
+
+type RemoveFromSavedPostOnUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  savedPostsSavedPost: SavedPost
+  userUser: User
+  savedPostsSavedPostEdge: SavedPostEdge
+  userUserEdge: UserEdge
+}
+
+input RemoveFromSavedPostOnUserSavedPostInput {
+  userUserId: ID!
+  savedPostsSavedPostId: ID!
+  clientMutationId: String!
+}
+
+type SavedPost implements Node {
+  createdAt: DateTime!
+  id: ID!
+  postId: String!
+  updatedAt: DateTime!
+  user(filter: UserFilter): User
+}
+
+# A connection to a list of items.
+type SavedPostConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [SavedPostEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type SavedPostEdge {
+  # The item at the end of the edge.
+  node: SavedPost!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input SavedPostFilter {
+  # Logical AND on all given filters.
+  AND: [SavedPostFilter!]
+
+  # Logical OR on all given filters.
+  OR: [SavedPostFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  postId: String
+
+  # All values that are not equal to given value.
+  postId_not: String
+
+  # All values that are contained in given list.
+  postId_in: [String!]
+
+  # All values that are not contained in given list.
+  postId_not_in: [String!]
+
+  # All values less than the given value.
+  postId_lt: String
+
+  # All values less than or equal the given value.
+  postId_lte: String
+
+  # All values greater than the given value.
+  postId_gt: String
+
+  # All values greater than or equal the given value.
+  postId_gte: String
+
+  # All values containing the given string.
+  postId_contains: String
+
+  # All values not containing the given string.
+  postId_not_contains: String
+
+  # All values starting with the given string.
+  postId_starts_with: String
+
+  # All values not starting with the given string.
+  postId_not_starts_with: String
+
+  # All values ending with the given string.
+  postId_ends_with: String
+
+  # All values not ending with the given string.
+  postId_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  user: UserFilter
+}
+
+enum SavedPostOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  postId_ASC
+  postId_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type SigninPayload {
+  token: String
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+input SigninUserInput {
+  email: AUTH_PROVIDER_EMAIL
+  clientMutationId: String!
+}
+
+input SignupUserInput {
+  firstname: String!
+  influence: Int
+  lastname: String!
+  username: String!
+  agreesIds: [ID!]
+  agrees: [UseragreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [UserdisagreesDisagree!]
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
+  savedPostsIds: [ID!]
+  savedPosts: [UsersavedPostsSavedPost!]
+  clientMutationId: String!
+  authProvider: AuthProviderSignupData!
+}
+
+input UpdateAgree {
+  id: ID!
+  postId: ID
+  post: AgreepostPost
+  userId: ID
+}
+
+input UpdateAgreeInput {
+  id: ID!
+  postId: ID
+  post: AgreepostPost
+  userId: ID
+  clientMutationId: String!
+}
+
+type UpdateAgreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agree: Agree
+  edge: AgreeEdge
+  post: Post
+  user: User
+}
+
+input UpdateDisagree {
+  id: ID!
+  postId: ID
+  post: DisagreepostPost
+  userId: ID
+}
+
+input UpdateDisagreeInput {
+  id: ID!
+  postId: ID
+  post: DisagreepostPost
+  userId: ID
+  clientMutationId: String!
+}
+
+type UpdateDisagreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagree: Disagree
+  edge: DisagreeEdge
+  post: Post
+  user: User
+}
+
+input UpdateFile {
+  id: ID!
+  name: String
+}
+
+input UpdateFileInput {
+  id: ID!
+  name: String
+  clientMutationId: String!
+}
+
+type UpdateFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+}
+
+input UpdateOrCreateAgreeInput {
+  update: UpdateAgree!
+  create: CreateAgree!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateAgreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  agree: Agree
+  edge: AgreeEdge
+  post: Post
+  user: User
+}
+
+input UpdateOrCreateDisagreeInput {
+  update: UpdateDisagree!
+  create: CreateDisagree!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateDisagreePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  disagree: Disagree
+  edge: DisagreeEdge
+  post: Post
+  user: User
+}
+
+input UpdateOrCreateFileInput {
+  update: UpdateFile!
+  create: CreateFile!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateFilePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  file: File
+  edge: FileEdge
+}
+
+input UpdateOrCreatePostInput {
+  update: UpdatePost!
+  create: CreatePost!
+  clientMutationId: String!
+}
+
+type UpdateOrCreatePostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  post: Post
+  edge: PostEdge
+  author: User
+}
+
+input UpdateOrCreateSavedPostInput {
+  update: UpdateSavedPost!
+  create: CreateSavedPost!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateSavedPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  savedPost: SavedPost
+  edge: SavedPostEdge
+  user: User
+}
+
+input UpdateOrCreateUserInput {
+  update: UpdateUser!
+  create: CreateUser!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+input UpdatePost {
+  content: String
+  id: ID!
+  authorId: ID
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+}
+
+input UpdatePostInput {
+  content: String
+  id: ID!
+  authorId: ID
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+  clientMutationId: String!
+}
+
+type UpdatePostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  post: Post
+  edge: PostEdge
+  author: User
+}
+
+input UpdateSavedPost {
+  id: ID!
+  postId: String
+  userId: ID
+}
+
+input UpdateSavedPostInput {
+  id: ID!
+  postId: String
+  userId: ID
+  clientMutationId: String!
+}
+
+type UpdateSavedPostPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  savedPost: SavedPost
+  edge: SavedPostEdge
+  user: User
+}
+
+input UpdateUser {
+  firstname: String
+  id: ID!
+  influence: Int
+  lastname: String
+  username: String
+  agreesIds: [ID!]
+  agrees: [UseragreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [UserdisagreesDisagree!]
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
+  savedPostsIds: [ID!]
+  savedPosts: [UsersavedPostsSavedPost!]
+}
+
+input UpdateUserInput {
+  firstname: String
+  id: ID!
+  influence: Int
+  lastname: String
+  username: String
+  agreesIds: [ID!]
+  agrees: [UseragreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [UserdisagreesDisagree!]
+  postsIds: [ID!]
+  posts: [UserpostsPost!]
+  savedPostsIds: [ID!]
+  savedPosts: [UsersavedPostsSavedPost!]
+  clientMutationId: String!
+}
+
+type UpdateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+type User implements Node {
+  agrees(filter: AgreeFilter, orderBy: AgreeOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AgreeConnection
+  createdAt: DateTime!
+  disagrees(filter: DisagreeFilter, orderBy: DisagreeOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): DisagreeConnection
+  email: String
+  firstname: String!
+  id: ID!
+  influence: Int
+  lastname: String!
+  password: String
+  posts(filter: PostFilter, orderBy: PostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection
+  savedPosts(filter: SavedPostFilter, orderBy: SavedPostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): SavedPostConnection
+  updatedAt: DateTime!
+  username: String!
+}
+
+input UseragreesAgree {
+  postId: ID
+  post: AgreepostPost
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+input UserdisagreesDisagree {
+  postId: ID
+  post: DisagreepostPost
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input UserFilter {
+  # Logical AND on all given filters.
+  AND: [UserFilter!]
+
+  # Logical OR on all given filters.
+  OR: [UserFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  email: String
+
+  # All values that are not equal to given value.
+  email_not: String
+
+  # All values that are contained in given list.
+  email_in: [String!]
+
+  # All values that are not contained in given list.
+  email_not_in: [String!]
+
+  # All values less than the given value.
+  email_lt: String
+
+  # All values less than or equal the given value.
+  email_lte: String
+
+  # All values greater than the given value.
+  email_gt: String
+
+  # All values greater than or equal the given value.
+  email_gte: String
+
+  # All values containing the given string.
+  email_contains: String
+
+  # All values not containing the given string.
+  email_not_contains: String
+
+  # All values starting with the given string.
+  email_starts_with: String
+
+  # All values not starting with the given string.
+  email_not_starts_with: String
+
+  # All values ending with the given string.
+  email_ends_with: String
+
+  # All values not ending with the given string.
+  email_not_ends_with: String
+  firstname: String
+
+  # All values that are not equal to given value.
+  firstname_not: String
+
+  # All values that are contained in given list.
+  firstname_in: [String!]
+
+  # All values that are not contained in given list.
+  firstname_not_in: [String!]
+
+  # All values less than the given value.
+  firstname_lt: String
+
+  # All values less than or equal the given value.
+  firstname_lte: String
+
+  # All values greater than the given value.
+  firstname_gt: String
+
+  # All values greater than or equal the given value.
+  firstname_gte: String
+
+  # All values containing the given string.
+  firstname_contains: String
+
+  # All values not containing the given string.
+  firstname_not_contains: String
+
+  # All values starting with the given string.
+  firstname_starts_with: String
+
+  # All values not starting with the given string.
+  firstname_not_starts_with: String
+
+  # All values ending with the given string.
+  firstname_ends_with: String
+
+  # All values not ending with the given string.
+  firstname_not_ends_with: String
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  influence: Int
+
+  # All values that are not equal to given value.
+  influence_not: Int
+
+  # All values that are contained in given list.
+  influence_in: [Int!]
+
+  # All values that are not contained in given list.
+  influence_not_in: [Int!]
+
+  # All values less than the given value.
+  influence_lt: Int
+
+  # All values less than or equal the given value.
+  influence_lte: Int
+
+  # All values greater than the given value.
+  influence_gt: Int
+
+  # All values greater than or equal the given value.
+  influence_gte: Int
+  lastname: String
+
+  # All values that are not equal to given value.
+  lastname_not: String
+
+  # All values that are contained in given list.
+  lastname_in: [String!]
+
+  # All values that are not contained in given list.
+  lastname_not_in: [String!]
+
+  # All values less than the given value.
+  lastname_lt: String
+
+  # All values less than or equal the given value.
+  lastname_lte: String
+
+  # All values greater than the given value.
+  lastname_gt: String
+
+  # All values greater than or equal the given value.
+  lastname_gte: String
+
+  # All values containing the given string.
+  lastname_contains: String
+
+  # All values not containing the given string.
+  lastname_not_contains: String
+
+  # All values starting with the given string.
+  lastname_starts_with: String
+
+  # All values not starting with the given string.
+  lastname_not_starts_with: String
+
+  # All values ending with the given string.
+  lastname_ends_with: String
+
+  # All values not ending with the given string.
+  lastname_not_ends_with: String
+  password: String
+
+  # All values that are not equal to given value.
+  password_not: String
+
+  # All values that are contained in given list.
+  password_in: [String!]
+
+  # All values that are not contained in given list.
+  password_not_in: [String!]
+
+  # All values less than the given value.
+  password_lt: String
+
+  # All values less than or equal the given value.
+  password_lte: String
+
+  # All values greater than the given value.
+  password_gt: String
+
+  # All values greater than or equal the given value.
+  password_gte: String
+
+  # All values containing the given string.
+  password_contains: String
+
+  # All values not containing the given string.
+  password_not_contains: String
+
+  # All values starting with the given string.
+  password_starts_with: String
+
+  # All values not starting with the given string.
+  password_not_starts_with: String
+
+  # All values ending with the given string.
+  password_ends_with: String
+
+  # All values not ending with the given string.
+  password_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  username: String
+
+  # All values that are not equal to given value.
+  username_not: String
+
+  # All values that are contained in given list.
+  username_in: [String!]
+
+  # All values that are not contained in given list.
+  username_not_in: [String!]
+
+  # All values less than the given value.
+  username_lt: String
+
+  # All values less than or equal the given value.
+  username_lte: String
+
+  # All values greater than the given value.
+  username_gt: String
+
+  # All values greater than or equal the given value.
+  username_gte: String
+
+  # All values containing the given string.
+  username_contains: String
+
+  # All values not containing the given string.
+  username_not_contains: String
+
+  # All values starting with the given string.
+  username_starts_with: String
+
+  # All values not starting with the given string.
+  username_not_starts_with: String
+
+  # All values ending with the given string.
+  username_ends_with: String
+
+  # All values not ending with the given string.
+  username_not_ends_with: String
+  agrees_every: AgreeFilter
+  agrees_some: AgreeFilter
+  agrees_none: AgreeFilter
+  disagrees_every: DisagreeFilter
+  disagrees_some: DisagreeFilter
+  disagrees_none: DisagreeFilter
+  posts_every: PostFilter
+  posts_some: PostFilter
+  posts_none: PostFilter
+  savedPosts_every: SavedPostFilter
+  savedPosts_some: SavedPostFilter
+  savedPosts_none: SavedPostFilter
+}
+
+enum UserOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  email_ASC
+  email_DESC
+  firstname_ASC
+  firstname_DESC
+  id_ASC
+  id_DESC
+  influence_ASC
+  influence_DESC
+  lastname_ASC
+  lastname_DESC
+  password_ASC
+  password_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  username_ASC
+  username_DESC
+}
+
+input UserpostsPost {
+  content: String!
+  agreesIds: [ID!]
+  agrees: [PostagreesAgree!]
+  disagreesIds: [ID!]
+  disagrees: [PostdisagreesDisagree!]
+}
+
+input UsersavedPostsSavedPost {
+  postId: String!
+}
+
+# This is the famous Relay viewer object
+type Viewer {
+  allAgrees(filter: AgreeFilter, orderBy: AgreeOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AgreeConnection!
+  allDisagrees(filter: DisagreeFilter, orderBy: DisagreeOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): DisagreeConnection!
+  allFiles(filter: FileFilter, orderBy: FileOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  allPosts(filter: PostFilter, orderBy: PostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
+  allSavedPosts(filter: SavedPostFilter, orderBy: SavedPostOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): SavedPostConnection!
+  allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user: User
+  Agree(id: ID): Agree
+  Disagree(id: ID): Disagree
+  File(id: ID, secret: String, url: String): File
+  Post(id: ID): Post
+  SavedPost(id: ID): SavedPost
+  User(email: String, id: ID, username: String): User
+  id: ID!
+}
+
