@@ -19,23 +19,16 @@ class Login extends Component {
 
   componentWillMount() {
     StatusBar.setBarStyle('light-content', true)
-    AsyncStorage.getItem('User', (err, data) => {
+    AsyncStorage.getItem('UserSession', (err, data) => {
       if (data) {
         Actions.main()
       }
     })
   }
 
-  saveUserData = (uid, token) => {
-    AsyncStorage.setItem('User', JSON.stringify({ uid, token }))
-  }
-
   login = () => {
     const { email, password } = this.state
-    SigninUser(email, password, (uid, token) => {
-      this.saveUserData(uid, token)
-      Actions.main()
-    })
+    SigninUser(email, password)
   }
 
   render() {

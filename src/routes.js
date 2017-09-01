@@ -6,7 +6,7 @@ import { BACKGROUND_GRAY, TINT } from './ui/theme'
 // import { CreatePostIcon } from './ui/icons'
 
 import Login from './components/Login'
-// import Signup from './components/Signup/'
+import Signup from './components/Signup/'
 import Feed from './components/Feed'
 import Main from './components/Main'
 // import CreatePost from './Components/CreatePost'
@@ -60,7 +60,7 @@ class Routes extends Component {
       <Router navigationBarStyle={styles.navBar} titleStyle={styles.title}>
         <Scene key="root">
           <Scene key="login" component={Login} hideNavBar />
-          {/* <Scene key="signup" component={Signup} hideNavBar /> */}
+          <Scene key="signup" component={Signup} hideNavBar />
           <Scene
             key="main"
             component={Main}

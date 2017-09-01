@@ -1,7 +1,12 @@
 import { commitMutation, graphql } from 'react-relay'
 import environment from '../Environment'
+import { AsyncStorage } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
-// TODO: Fix - user id not in the payload
+const saveUserData = (uid, token) => {
+  AsyncStorage.setItem('UserSession', JSON.stringify({ uid, token }))
+}
+
 const mutation = graphql`
   mutation SigninUserMutation ($input: SigninUserInput!) {
     signinUser (input: $input) {
@@ -16,7 +21,6 @@ const mutation = graphql`
 export default (
   email: string,
   password: string,
-  callback: () => void,
 ) => {
   const variables = {
     input: {
@@ -34,8 +38,8 @@ export default (
       mutation,
       variables,
       onCompleted: (response) => {
-        console.log('UID', response.signinUser)
-        callback(response.signinUser.user.id, response.signinUser.token)
+        saveUserData(response.signinUser.user.id, response.signinUser.token)
+        Actions.main()
       },
       onError: err => console.error(err),
     },
