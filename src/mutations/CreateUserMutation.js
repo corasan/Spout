@@ -1,5 +1,6 @@
 import { commitMutation, graphql } from 'react-relay'
 import environment from '../Environment'
+import SigninUser from './SigninUserMutation'
 
 const mutation = graphql`
   mutation CreateUserMutation ($input: SignupUserInput!) {
@@ -17,7 +18,6 @@ export default (
   username: String,
   email: String,
   password: String,
-  callback: () => void,
 ) => {
   const variables = {
     input: {
@@ -40,12 +40,8 @@ export default (
     {
       mutation,
       variables,
-      onCompleted: () => {
-        if (callback) {
-          callback()
-        } else {
-          console.log('User creation success!')
-        }
+      onCompleted: (response) => {
+        SigninUser(email, password)
       },
       onError: err => console.error(err),
     },

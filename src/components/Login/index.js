@@ -26,16 +26,9 @@ class Login extends Component {
     })
   }
 
-  saveUserData = (uid, token) => {
-    AsyncStorage.setItem('User', JSON.stringify({ uid, token }))
-  }
-
   login = () => {
     const { email, password } = this.state
-    SigninUser(email, password, (uid, token) => {
-      this.saveUserData(uid, token)
-      Actions.main()
-    })
+    SigninUser(email, password)
   }
 
   render() {
