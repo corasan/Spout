@@ -22,10 +22,6 @@ class Post extends Component {
     }
   }
 
-  componentWillMount() {
-    console.log('SECOND ONE', this.props.post.node.content)
-  }
-
   // renderDeletePost = (uid) => {
   //   if (this.state.user.uid === uid) {
   //     return (

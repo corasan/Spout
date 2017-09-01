@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Image, TextInput, Text, TouchableOpacity, StatusBar, AsyncStorage, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-// import SigninUser from '../../mutations/SigninUserMutation'
+import SigninUser from '../../mutations/SigninUserMutation'
 
 import styles from './styles'
 
@@ -19,12 +19,11 @@ class Login extends Component {
 
   componentWillMount() {
     StatusBar.setBarStyle('light-content', true)
-    // AsyncStorage.getItem('User', (err, data) => {
-    //   const auth = JSON.parse(data)
-    //   if (auth.token) {
-    //     Actions.main()
-    //   }
-    // })
+    AsyncStorage.getItem('User', (err, data) => {
+      if (data) {
+        Actions.main()
+      }
+    })
   }
 
   saveUserData = (uid, token) => {
@@ -33,11 +32,10 @@ class Login extends Component {
 
   login = () => {
     const { email, password } = this.state
-    Actions.main()
-    // SigninUser(email, password, (uid, token) => {
-    //   this.saveUserData(uid, token)
-    //   Actions.feed()
-    // })
+    SigninUser(email, password, (uid, token) => {
+      this.saveUserData(uid, token)
+      Actions.main()
+    })
   }
 
   render() {

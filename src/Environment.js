@@ -6,15 +6,17 @@ const store = new Store(new RecordSource())
 
 const network = Network.create((operation, variables) => {
   return AsyncStorage.getItem('User', (error, data) => {
-    return JSON.parse(data)
-  }).then((obj) => {
-    const user = JSON.parse(obj)
+    if (data) {
+      return data
+    }
+  }).then((data) => {
+    const user = JSON.parse(data)
     return fetch(graphcoolEnpoint, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${user.token}`
+        'Authorization': user ? `Bearer ${user.token}` : '',
       },
       body: JSON.stringify({
         query: operation.text,

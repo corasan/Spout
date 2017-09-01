@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Image, Text, TouchableOpacity, ListView, RefreshControl } from 'react-native'
-import { createFragmentContainer, graphql } from 'react-relay'
 import Post from './Post'
 
 class PostList extends Component {
@@ -14,10 +13,6 @@ class PostList extends Component {
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
     }
-  }
-
-  componentWillMount() {
-    // console.log('THIS IS VIEWER PROPS', this.props.viewer.allPosts)
   }
 
   renderRow = post => (
@@ -47,26 +42,4 @@ class PostList extends Component {
   }
 }
 
-export default createFragmentContainer(PostList, graphql`
-  fragment PostList_viewer on Viewer {
-    allPosts(orderBy: createdAt_DESC) {
-      edges {
-        node {
-          id
-          content
-          createdAt
-          author {
-            id
-            username
-          }
-          agrees {
-            count
-          }
-          disagrees {
-            count
-          }
-        }
-      }
-    }
-  }
-`)
+export default PostList

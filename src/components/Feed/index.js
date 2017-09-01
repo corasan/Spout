@@ -10,14 +10,32 @@ import PostList from './PostList'
 const FeedQuery = graphql`
   query FeedQuery {
     viewer {
-      ...PostList_viewer
+      allPosts(orderBy: createdAt_DESC) {
+        edges {
+          node {
+            id
+            content
+            createdAt
+            author {
+              id
+              username
+            }
+            agrees {
+              count
+            }
+            disagrees {
+              count
+            }
+          }
+        }
+      }
     }
   }
 `
 
 const Feed = () => (
   <QueryRenderer
-    environment={environment }
+    environment={environment}
     query={FeedQuery}
     render={({ error, props }) => {
       if (error) {
