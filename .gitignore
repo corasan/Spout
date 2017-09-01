@@ -55,3 +55,4 @@ fastlane/screenshots
 .vscode
 graphcoolEndpoint.js
 project.graphcool
+__generated__
