@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 const saveUserData = (uid, token) => {
-  AsyncStorage.setItem('User', JSON.stringify({ uid, token }))
+  AsyncStorage.setItem('UserSession', JSON.stringify({ uid, token }))
 }
 
 const mutation = graphql`

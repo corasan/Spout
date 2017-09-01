@@ -5,7 +5,7 @@ import graphcoolEnpoint from '../graphcoolEndpoint'
 const store = new Store(new RecordSource())
 
 const network = Network.create((operation, variables) => {
-  return AsyncStorage.getItem('User', (error, data) => {
+  return AsyncStorage.getItem('UserSession', (error, data) => {
     if (data) {
       return data
     }

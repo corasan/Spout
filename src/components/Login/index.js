@@ -19,7 +19,7 @@ class Login extends Component {
 
   componentWillMount() {
     StatusBar.setBarStyle('light-content', true)
-    AsyncStorage.getItem('User', (err, data) => {
+    AsyncStorage.getItem('UserSession', (err, data) => {
       if (data) {
         Actions.main()
       }
