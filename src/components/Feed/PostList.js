@@ -4,9 +4,9 @@ import { View, Image, Text, TouchableOpacity, ListView, RefreshControl } from 'r
 import Post from './Post'
 
 class PostList extends Component {
-  // static propTypes = {
-  //   viewer: PropTypes.objectOf(PropTypes.object).isRequired,
-  // }
+  static propTypes = {
+    viewer: PropTypes.objectOf(PropTypes.object).isRequired,
+  }
 
   constructor(props) {
     super(props)

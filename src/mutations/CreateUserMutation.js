@@ -3,7 +3,7 @@ import environment from '../Environment'
 import SigninUser from './SigninUserMutation'
 
 const mutation = graphql`
-  mutation CreateUserMutation ($input: SignupUserInput!) {
+  mutation CreateUserMutation($input: SignupUserInput!) {
     createUser(input: $input) {
       user {
         id
@@ -13,11 +13,11 @@ const mutation = graphql`
 `
 
 export default (
-  firstname: String,
-  lastname: String,
-  username: String,
-  email: String,
-  password: String,
+  firstname: string,
+  lastname: string,
+  username: string,
+  email: string,
+  password: string,
 ) => {
   const variables = {
     input: {
