@@ -25,9 +25,7 @@ export default (content: string, authorId: string) => {
     {
       mutation,
       variables,
-      onCompleted: (response) => {
-        console.log(response)
-      },
+      onCompleted: response => console.log(response),
       onError: err => console.error(err)
     },
   )

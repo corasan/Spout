@@ -38,7 +38,6 @@ class Post extends Component {
     }).then(() => {
       _.each(this.agrees, (agree) => {
         if (_.includes(agree.node.user, this.state.uid)) {
-          console.log('agree.node.id', agree.node.id)
           this.setState({ agreePressed: true, currentAgree: agree.node.id })
         } 
       })
@@ -68,18 +67,9 @@ class Post extends Component {
   //   }
   // }
 
-  deleteAgreeOrDisagree = (arr) => {
-    _.each(arr, (el) => {
-      console.log(el.node)
-      if (_.includes(el.node.user, this.state.ui)) {
-        DeleteAgree(el.node.id)
-      }
-    })
-  }
-
   handleAgreeButton = (postId) => {
     if (!this.state.agreePressed) {
-      CreateAgree(postId, this.state.uid)
+      CreateAgree(postId, this.state.uid, this.state.currentDisagree)
       this.setState({
         agreePressed: !this.state.agreePressed,
         disagreePressed: false,
