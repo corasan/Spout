@@ -8,8 +8,8 @@ const saveUserData = (uid, token) => {
 }
 
 const mutation = graphql`
-  mutation SigninUserMutation ($input: SigninUserInput!) {
-    signinUser (input: $input) {
+  mutation SigninUserMutation($input: SigninUserInput!) {
+    signinUser(input: $input) {
       token
       user {
         id
