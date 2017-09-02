@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, View, Text, TouchableOpacity, Image, TextInput, Dimensions, Alert } from 'react-native'
+import { Modal, View, Text, TouchableOpacity, Image, TextInput, Dimensions, Alert, AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import CreateNewPost from '../../mutations/CreatePostMutation'
 
 import styles from './styles'
 
@@ -18,13 +19,19 @@ class CreatePost extends Component {
     this.state = {
       content: '',
       createPostVisible: this.props.createPostVisible,
+      author: '',
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.createPostVisible !== nextProps.createPostVisible) {
-      Actions.createPost()
-    }
+  componentWillMount() {
+    AsyncStorage.getItem('UserSession', (err, data) => {
+      if (data) {
+        const user = JSON.parse(data)
+        this.setState({ author: user.uid})
+      } else {
+        console.error(err)
+      }
+    })
   }
 
   renderCharactersLeft = () => {
@@ -44,7 +51,8 @@ class CreatePost extends Component {
       Alert.alert('Write something first!')
       return null
     }
-    // CreateNewPost(this.state.content, this.closeModal())
+    this.closeModal()
+    CreateNewPost(this.state.content, this.state.author)
   }
 
   render() {
