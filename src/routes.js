@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Router, Scene, Actions } from 'react-native-router-flux'
 import { BACKGROUND_GRAY, TINT } from './ui/theme'
-// import { CreatePostIcon } from './ui/icons'
+import { CreatePostIcon } from './ui/icons'
 
 import Login from './components/Login'
 import Signup from './components/Signup/'
 import Feed from './components/Feed'
 import Main from './components/Main'
-// import CreatePost from './Components/CreatePost'
+import CreatePost from './components/CreatePost'
 
 
 const styles = StyleSheet.create({
@@ -30,30 +30,26 @@ const styles = StyleSheet.create({
 })
 
 class Routes extends Component {
-  // static propTypes = {
-  //   openCreatePostModal: PropTypes.func.isRequired,
-  //   createPostVisible: PropTypes.bool.isRequired,
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.createPostVisible !== nextProps.createPostVisible) {
-  //     Actions.createPost()
-  //   }
-  // }
-
-  openCreatePost = () => {
-    // this.props.openCreatePostModal(!this.props.createPostVisible)
+  constructor() {
+    super()
+    this.state = {
+      createPostVisible: false,
+    }
   }
 
-  // renderRightButton = () => {
-  //   return (
-  //     <View style={{ marginRight: 5, marginTop: 3 }}>
-  //       <TouchableOpacity onPress={() => this.openCreatePost()}>
-  //         <CreatePostIcon />
-  //       </TouchableOpacity>
-  //     </View>
-  //   )
-  // }
+  openCreatePost = () => {
+    Actions.createPost({ createPostVisible: true })
+  }
+
+  renderRightButton = () => {
+    return (
+      <View style={{ marginRight: 5, marginTop: 3 }}>
+        <TouchableOpacity onPress={() => this.openCreatePost()}>
+          <CreatePostIcon />
+        </TouchableOpacity>
+      </View>
+    )
+  }
 
   render() {
     return (
@@ -68,10 +64,16 @@ class Routes extends Component {
             title="Feed"
             titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, fontSize: 24, marginBottom: 2 }}
             hideBackImage
-            // renderRightButton={() => this.renderRightButton()}
+            renderRightButton={() => this.renderRightButton()}
             sceneStyle={styles.appBackground}
           />
-          {/* <Scene key="createPost" component={CreatePost} hideNavBar direction="vertical" /> */}
+          <Scene
+            key="createPost"
+            component={CreatePost}
+            visible={this.state.createPostVisible}
+            hideNavBar
+            direction="vertical"
+          />
         </Scene>
       </Router>
     )
