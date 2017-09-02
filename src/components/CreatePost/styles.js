@@ -26,6 +26,7 @@ export default StyleSheet.create({
     fontSize: 16,
     maxHeight: 200,
     backgroundColor: BACKGROUND_GRAY,
+    fontFamily: IOS_FONT,
   },
   tellTheWorld: {
     fontSize: 30,

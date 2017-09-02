@@ -12,7 +12,6 @@ const mutation = graphql`
 `
 
 export default (content: string, authorId: string) => {
-  console.log('content', content)
   const variables = {
     input: {
       content,
