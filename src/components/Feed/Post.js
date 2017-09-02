@@ -15,6 +15,7 @@ import CreateDisagree from '../../mutations/CreateDisagreeMutation'
 
 import styles from './styles'
 
+// TODO: FIX ALL ISSUES RELATED TO POST
 class Post extends Component {
   constructor(props) {
     super(props)
