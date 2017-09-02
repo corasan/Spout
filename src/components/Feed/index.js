@@ -5,41 +5,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import environment from '../../Environment'
 import PostList from './PostList'
 
-// import styles from './styles'
-
-const FeedQuery = graphql`
-  query FeedQuery {
-    viewer {
-      allPosts(orderBy: createdAt_DESC) {
-        edges {
-          node {
-            id
-            content
-            createdAt
-            author {
-              id
-              username
-            }
-            agrees {
-              count
-              edges {
-                node {
-                  id
-                  user {
-                    id
-                  }
-                }
-              }
-            }
-            disagrees {
-              count
-            }
-          }
-        }
-      }
-    }
-  }
-`
+import FeedQuery from './FeedQuery'
 
 const Feed = () => (
   <QueryRenderer

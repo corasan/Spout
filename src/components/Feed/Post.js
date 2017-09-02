@@ -11,6 +11,7 @@ import {
   DisagreeIconPressed,
 } from '../../ui/icons'
 import CreateAgree from '../../mutations/CreateAgreeMutation'
+import CreateDisagree from '../../mutations/CreateDisagreeMutation'
 
 import styles from './styles'
 
@@ -33,8 +34,12 @@ class Post extends Component {
     })
 
     const agrees = this.props.post.node.agrees.edges
+    const disagrees = this.props.post.node.disagrees.edges
+
     _.each(agrees, (agree, i) => {
       if (!_.includes(agree.node.user, this.state.uid)) {
+        this.setState({ agreePressed: true })
+      } else if (!_.includes(agree.node.user, this.state.uid)) {
         this.setState({ agreePressed: true })
       }
     })
@@ -69,12 +74,13 @@ class Post extends Component {
   }
 
   handleDisagreeButton = (postId) => {
-    this.setState({ disagreePressed: !this.state.disagreePressed, agreePressed: false })
-    // if (this.state.agreePressed) {
-    //   CreateAgree(postId, this.state.uid)
-    // } else {
-    //   console.log('untoggle agree')
-    // }
+    if (!this.state.disagreePressed) {
+      CreateDisagree(postId, this.state.uid)
+      this.setState({
+        disagreePressed: !this.state.disagreePressed,
+        agreePressed: false
+      })
+    }
   }
 
   renderAgreeIcon = (postId) => {
