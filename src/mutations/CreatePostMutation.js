@@ -28,7 +28,7 @@ export default (content: string, authorId: string) => {
       onCompleted: (response) => {
         console.log(response)
       },
-      onError: (err) => console.error(err)
+      onError: err => console.error(err)
     },
   )
 }

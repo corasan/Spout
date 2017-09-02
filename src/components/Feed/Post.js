@@ -22,7 +22,11 @@ class Post extends Component {
       uid: '',
       agreePressed: false,
       disagreePressed: false,
+      currentAgree: '',
+      currentDisagree: '',
     }
+    this.agrees = this.props.post.node.agrees.edges
+    this.disagrees = this.props.post.node.disagrees.edges
   }
 
   componentWillMount() {
@@ -31,17 +35,19 @@ class Post extends Component {
         const session = JSON.parse(data)
         this.setState({ uid: session.uid})
       }
-    })
-
-    const agrees = this.props.post.node.agrees.edges
-    const disagrees = this.props.post.node.disagrees.edges
-
-    _.each(agrees, (agree, i) => {
-      if (!_.includes(agree.node.user, this.state.uid)) {
-        this.setState({ agreePressed: true })
-      } else if (!_.includes(agree.node.user, this.state.uid)) {
-        this.setState({ agreePressed: true })
-      }
+    }).then(() => {
+      _.each(this.agrees, (agree) => {
+        if (_.includes(agree.node.user, this.state.uid)) {
+          console.log('agree.node.id', agree.node.id)
+          this.setState({ agreePressed: true, currentAgree: agree.node.id })
+        } 
+      })
+    }).then(() => {
+      _.each(this.disagrees, (disagree) => {
+        if (_.includes(disagree.node.user, this.state.uid)) {
+          this.setState({ disagreePressed: true, currentDisagree: disagree.node.id })
+        } 
+      })
     })
   }
 
@@ -62,8 +68,16 @@ class Post extends Component {
   //   }
   // }
 
+  deleteAgreeOrDisagree = (arr) => {
+    _.each(arr, (el) => {
+      console.log(el.node)
+      if (_.includes(el.node.user, this.state.ui)) {
+        DeleteAgree(el.node.id)
+      }
+    })
+  }
+
   handleAgreeButton = (postId) => {
-    const agrees = this.props.post.node.agrees.edges
     if (!this.state.agreePressed) {
       CreateAgree(postId, this.state.uid)
       this.setState({
@@ -75,7 +89,7 @@ class Post extends Component {
 
   handleDisagreeButton = (postId) => {
     if (!this.state.disagreePressed) {
-      CreateDisagree(postId, this.state.uid)
+      CreateDisagree(postId, this.state.uid, this.state.currentAgree)
       this.setState({
         disagreePressed: !this.state.disagreePressed,
         agreePressed: false
