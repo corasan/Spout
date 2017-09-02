@@ -38,13 +38,18 @@ class Post extends Component {
     }).then(() => {
       _.each(this.agrees, (agree) => {
         if (_.includes(agree.node.user, this.state.uid)) {
-          this.setState({ agreePressed: true, currentAgree: agree.node.id })
+          this.setState({
+            agreePressed: true,
+            currentAgree: agree.node.id,
+          })
         } 
       })
-    }).then(() => {
       _.each(this.disagrees, (disagree) => {
         if (_.includes(disagree.node.user, this.state.uid)) {
-          this.setState({ disagreePressed: true, currentDisagree: disagree.node.id })
+          this.setState({
+            disagreePressed: true,
+            currentDisagree: disagree.node.id,
+          })
         } 
       })
     })
@@ -74,15 +79,16 @@ class Post extends Component {
         agreePressed: !this.state.agreePressed,
         disagreePressed: false,
       })
-    }    
+    }
   }
-
+  // TODO: Fix toggle agree/disagree. When switching between agree/disagree
+  // it counts as many agrees/disagrees
   handleDisagreeButton = (postId) => {
     if (!this.state.disagreePressed) {
       CreateDisagree(postId, this.state.uid, this.state.currentAgree)
       this.setState({
         disagreePressed: !this.state.disagreePressed,
-        agreePressed: false
+        agreePressed: false,
       })
     }
   }
