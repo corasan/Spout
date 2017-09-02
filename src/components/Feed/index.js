@@ -22,6 +22,14 @@ const FeedQuery = graphql`
             }
             agrees {
               count
+              edges {
+                node {
+                  id
+                  user {
+                    id
+                  }
+                }
+              }
             }
             disagrees {
               count

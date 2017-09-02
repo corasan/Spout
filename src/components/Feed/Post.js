@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import moment from 'moment'
+import _ from 'lodash'
 // import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 import {
   AgreeIcon,
@@ -9,6 +10,7 @@ import {
   AgreeIconPressed,
   DisagreeIconPressed,
 } from '../../ui/icons'
+import CreateAgree from '../../mutations/CreateAgreeMutation'
 
 import styles from './styles'
 
@@ -16,10 +18,26 @@ class Post extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: '',
+      uid: '',
       agreePressed: false,
       disagreePressed: false,
     }
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('UserSession', (err, data) => {
+      if (data) {
+        const session = JSON.parse(data)
+        this.setState({ uid: session.uid})
+      }
+    })
+
+    const agrees = this.props.post.node.agrees.edges
+    _.each(agrees, (agree, i) => {
+      if (!_.includes(agree.node.user, this.state.uid)) {
+        this.setState({ agreePressed: true })
+      }
+    })
   }
 
   // renderDeletePost = (uid) => {
@@ -40,13 +58,23 @@ class Post extends Component {
   // }
 
   handleAgreeButton = (postId) => {
-    this.setState({ agreePressed: !this.state.agreePressed, disagreePressed: false })
-    // this.props.postAgree(postId, this.state.user.uid)
+    const agrees = this.props.post.node.agrees.edges
+    if (!this.state.agreePressed) {
+      CreateAgree(postId, this.state.uid)
+      this.setState({
+        agreePressed: !this.state.agreePressed,
+        disagreePressed: false,
+      })
+    }    
   }
 
   handleDisagreeButton = (postId) => {
     this.setState({ disagreePressed: !this.state.disagreePressed, agreePressed: false })
-    // this.props.postDisagree(postId)
+    // if (this.state.agreePressed) {
+    //   CreateAgree(postId, this.state.uid)
+    // } else {
+    //   console.log('untoggle agree')
+    // }
   }
 
   renderAgreeIcon = (postId) => {
@@ -118,7 +146,10 @@ class Post extends Component {
 
         <View style={styles.postRow}>
           <View style={[styles.postRow, { justifyContent: 'flex-start', marginTop: 4 }]}>
-            <TouchableOpacity style={{ marginTop: 1, marginRight: 12 }} onPress={() => this.handleAgreeButton(post.id)}>
+            <TouchableOpacity
+              style={{ marginTop: 1, marginRight: 12 }}
+              onPress={() => this.handleAgreeButton(post.id)}
+            >
               {this.renderAgreeIcon()}
             </TouchableOpacity>
 
