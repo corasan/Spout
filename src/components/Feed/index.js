@@ -1,6 +1,5 @@
 import React from 'react'
 import { Text } from 'react-native'
-import PropTypes from 'prop-types'
 import { graphql, QueryRenderer } from 'react-relay'
 import environment from '../../Environment'
 import PostList from './PostList'
@@ -13,7 +12,7 @@ const Feed = () => (
     query={FeedQuery}
     render={({ error, props }) => {
       if (error) {
-        return <div>{error.message}</div>
+        return <Text>{error.message}</Text>
       } else if (props) {
         return <PostList viewer={props.viewer} />
       }
