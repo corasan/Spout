@@ -14,10 +14,11 @@ import CreatePost from './components/CreatePost'
 
 const styles = StyleSheet.create({
   navBar: {
-    backgroundColor: 'white',
+    backgroundColor: MAIN,
     borderBottomWidth: 0,
     borderBottomColor: 'rgba(0, 0, 0, 0.15)',
-    height: 70,
+    height: 60,
+    paddingRight: 8,
   },
   title: {
     color: 'white',
@@ -61,7 +62,7 @@ class Routes extends Component {
             key="main"
             component={Main}
             hideNavBar={false}
-            title="Feed"
+            // title="Feed"
             titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
             hideBackImage
             renderRightButton={() => this.renderRightButton()}

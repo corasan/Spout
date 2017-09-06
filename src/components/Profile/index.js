@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, AsyncStorage } from 'react-native'
 import { graphql, QueryRenderer } from 'react-relay'
 import environment from '../../Environment'
-import Personal from './Personal'
+import UserDetails from './UserDetails'
 
 const ProfileQuery = graphql`
   query ProfileQuery($id: ID!) {
@@ -50,7 +50,7 @@ class Profile extends Component {
             console.log('the error', error)
             return <Text>{error.message}</Text>
           } else if (props) {
-            return <Personal user={props.viewer.User}/>
+            return <UserDetails user={props.viewer.User}/>
           }
           return <Text>Loading</Text>
         }}

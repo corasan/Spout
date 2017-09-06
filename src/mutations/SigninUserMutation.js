@@ -39,7 +39,7 @@ export default (
       variables,
       onCompleted: (response) => {
         saveUserData(response.signinUser.user.id, response.signinUser.token)
-        Actions.main()
+        Actions.replace('main')
       },
       onError: err => console.error(err),
     },
