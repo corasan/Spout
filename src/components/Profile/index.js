@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text, AsyncStorage } from 'react-native'
 import { graphql, QueryRenderer } from 'react-relay'
+import AnimatedTabs from 'rn-animated-tabs';
 import environment from '../../Environment'
 import UserDetails from './UserDetails'
+import MyPostsList from './MyPostsList'
+import SavedPostsList from './SavedPostsList'
+
+import styles from './styles'
 
 const ProfileQuery = graphql`
   query ProfileQuery($id: ID!) {
@@ -23,6 +28,7 @@ class Profile extends Component {
     super()
     this.state = {
       id: '',
+      currentTab: 0,
     }
   }
 
@@ -30,14 +36,29 @@ class Profile extends Component {
     AsyncStorage.getItem('UserSession', (error, data) => {
       const user = JSON.parse(data)
       if (user) {
-        // console.log(user.uid)
         this.setState({ id: user.uid })
       }
     })
   }
 
+  renderProfile = (props) => {
+    const tabContent = [<MyPostsList />, <SavedPostsList />]
+    return (
+      <View style={styles.container}>
+        <UserDetails user={props.viewer.User}/>
+        <AnimatedTabs
+          tabTitles={['Saved Posts', 'My Posts']}
+          onChangeTab={(currentTab) => this.setState({ currentTab })}
+          activeTabIndicatorColor='#1ABC9C'
+          containerStyle={styles.tabContainerStyle}
+          tabTextStyle={{ fontFamily: 'Chalkboard SE' }}
+        />
+        {tabContent[this.state.currentTab]}
+      </View>
+    )
+  }
+
   render() {
-    console.log('the id', this.state.id)
     return (
       <QueryRenderer
         environment={environment}
@@ -47,10 +68,9 @@ class Profile extends Component {
         }}
         render={({ error, props}) => {
           if (error) {
-            console.log('the error', error)
             return <Text>{error.message}</Text>
           } else if (props) {
-            return <UserDetails user={props.viewer.User}/>
+            return this.renderProfile(props)
           }
           return <Text>Loading</Text>
         }}

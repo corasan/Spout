@@ -11,19 +11,26 @@ export default StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 16,
   },
-  username: {
+  name: {
     fontFamily: IOS_FONT_BOLD,
     fontSize: 18,
     color: TINT,
+    backgroundColor: 'transparent',
   },
-  name: {
+  username: {
     fontFamily: IOS_FONT,
-    fontSize: 14,
-    color: LIGHT_TEXT,
+    fontSize: 15,
+    color: MAIN,
     marginTop: -5,
+    backgroundColor: 'transparent',
   },
   namesArea: {
     marginTop: 2,
     marginLeft: 15,
   },
+  tabContainerStyle: {
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: -0.5 },
+    shadowOpacity: 0.05,
+  }
 })
