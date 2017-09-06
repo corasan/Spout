@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Router, Scene, Actions } from 'react-native-router-flux'
-import { BACKGROUND_GRAY, TINT } from './ui/theme'
+import { BACKGROUND_GRAY, TINT, MAIN } from './ui/theme'
 import { CreatePostIcon } from './ui/icons'
 
 import Login from './components/Login'
@@ -62,7 +62,7 @@ class Routes extends Component {
             component={Main}
             hideNavBar={false}
             title="Feed"
-            titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, fontSize: 24, marginBottom: 2 }}
+            titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
             hideBackImage
             renderRightButton={() => this.renderRightButton()}
             sceneStyle={styles.appBackground}

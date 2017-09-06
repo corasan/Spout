@@ -17,7 +17,7 @@ export class CreatePostIcon extends Component {
   render() {
     return (
       <View ref={thisComponent => this.createPost = thisComponent}>
-        <SimpleLineIcons name="pencil" size={25} color={MAIN} />
+        <SimpleLineIcons name="pencil" size={22} color={TINT} />
       </View>
     )
   }
