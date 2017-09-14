@@ -53,9 +53,10 @@ class Profile extends Component {
   }
 
   renderProfile = (props) => {
-    const user = props.viewer.User   
+    const user = props.viewer.User
+    const savedPosts = user.savedPosts.edges  
     const tabContent = [
-      user.savedPosts.edges.lenght > 0 ? <SavedPosts posts={user.savedPosts.edges} /> : <NoPosts />,
+      savedPosts.length > 0 ? <SavedPosts posts={savedPosts} /> : <NoPosts />,
       <MyPostsList />
     ]
 
