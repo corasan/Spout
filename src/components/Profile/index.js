@@ -6,6 +6,7 @@ import environment from '../../Environment'
 import UserDetails from './UserDetails'
 import MyPostsList from './MyPostsList'
 import SavedPosts from './SavedPosts'
+import NoPosts from './NoPosts'
 
 import styles from './styles'
 
@@ -54,7 +55,7 @@ class Profile extends Component {
   renderProfile = (props) => {
     const user = props.viewer.User   
     const tabContent = [
-      <SavedPosts posts={user.savedPosts.edges} />,
+      user.savedPosts.edges.lenght > 0 ? <SavedPosts posts={user.savedPosts.edges} /> : <NoPosts />,
       <MyPostsList />
     ]
 
