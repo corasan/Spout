@@ -5,7 +5,7 @@ import AnimatedTabs from 'rn-animated-tabs';
 import environment from '../../Environment'
 import UserDetails from './UserDetails'
 import MyPostsList from './MyPostsList'
-import SavedPostsList from './SavedPostsList'
+import SavedPosts from './SavedPosts'
 
 import styles from './styles'
 
@@ -16,8 +16,18 @@ const ProfileQuery = graphql`
         username
         firstname
         lastname
-        email
         influence
+        savedPosts {
+          edges {
+            node {
+              id
+              postId
+              content
+              agrees
+              disagrees
+            }
+          }
+        }
       }
     }
   }
@@ -42,10 +52,15 @@ class Profile extends Component {
   }
 
   renderProfile = (props) => {
-    const tabContent = [<MyPostsList />, <SavedPostsList />]
+    const user = props.viewer.User   
+    const tabContent = [
+      <SavedPosts posts={user.savedPosts.edges} />,
+      <MyPostsList />
+    ]
+
     return (
       <View style={styles.container}>
-        <UserDetails user={props.viewer.User}/>
+        <UserDetails user={user}/>
         <AnimatedTabs
           tabTitles={['Saved Posts', 'My Posts']}
           onChangeTab={(currentTab) => this.setState({ currentTab })}
