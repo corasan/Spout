@@ -1,13 +1,46 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
-import ProfilePost from '../ProfilePost'
+import { View, Text } from 'react-native'
+import { graphql, QueryRenderer } from 'react-relay'
+import environment from '../../../Environment'
+import SavedPostsList from './SavedPostsList'
 
-const SavedPostsList = (props) => (
-  <FlatList
-    data={props.posts}
-    renderItem={({item}) => <ProfilePost post={item} /> }
-    keyExtractor={(item, index) => index}
+const SavedPostsQuery = graphql`
+  query SavedPostsQuery($id: ID!) {
+    viewer {
+      User(id: $id) {
+        savedPosts {
+          edges {
+            node {
+              id
+              content
+              agrees
+              disagrees
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+const SavedPosts = (props) => (
+  <QueryRenderer
+    environment={environment}
+    query={SavedPostsQuery}
+    variables={{ 
+      filter: {
+        author: {id: props.uid }
+      }
+    }}
+    render={({ error, props}) => {
+      if (error) {
+        return <Text>{error.message}</Text>
+      } else if (props) {
+        return <SavedPostsList posts={props.viewer.allPosts.edges} />
+      }
+      return <Text>Loading</Text>
+    }}
   />
 )
 
-export default SavedPostsList
+export default SavedPosts

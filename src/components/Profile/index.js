@@ -57,7 +57,7 @@ class Profile extends Component {
     const noSavedPosts = 'You haven\'t saved any posts yet'
     const noMyPosts = 'You haven\'t posted anything yet'
     const tabContent = [
-      savedPosts.length > 0 ? <SavedPosts posts={savedPosts} /> : <NoPosts msg={noSavedPosts} />,
+      savedPosts.length > 0 ? <SavedPosts uid={this.state.uid} /> : <NoPosts msg={noSavedPosts} />,
       <MyPosts uid={this.state.uid} />
     ]
 
