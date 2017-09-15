@@ -43,4 +43,24 @@ export default StyleSheet.create({
     fontFamily: IOS_FONT_BOLD,
     color: DARKER_GRAY,
   },
+  post: {
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    borderBottomColor: 'rgba(240, 240, 240, 0.6)',
+    borderBottomWidth: 1,
+  },
+  content: {
+    fontFamily: IOS_FONT,
+    color: TINT,
+  },
+  postAgreeDisagree: {
+    flexDirection: 'row',
+    marginTop: 20,
+  },
+  agreeDisagreeText: {
+    fontSize: 11,
+    color: LIGHT_TEXT,
+    fontFamily: IOS_FONT,
+  },
 })

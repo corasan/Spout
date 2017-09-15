@@ -3,9 +3,9 @@ import { View, Text, AsyncStorage, FlatList } from 'react-native'
 
 import styles from './styles'
 
-const NoPosts = () => (
+const NoPosts = (props) => (
   <View style={styles.noPosts}>
-    <Text style={styles.noPostsText}>You haven't saved any posts yet</Text>
+    <Text style={styles.noPostsText}>{props.msg}</Text>
   </View>
 )
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
-import SavedPost from './SavedPost'
+import ProfilePost from '../ProfilePost'
 
 const SavedPostsList = (props) => (
   <FlatList
     data={props.posts}
-    renderItem={({item}) => <SavedPost post={item} /> }
+    renderItem={({item}) => <ProfilePost post={item} /> }
     keyExtractor={(item, index) => index}
   />
 )

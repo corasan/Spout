@@ -4,7 +4,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import AnimatedTabs from 'rn-animated-tabs';
 import environment from '../../Environment'
 import UserDetails from './UserDetails'
-import MyPostsList from './MyPostsList'
+import MyPosts from './MyPosts'
 import SavedPosts from './SavedPosts'
 import NoPosts from './NoPosts'
 
@@ -22,7 +22,6 @@ const ProfileQuery = graphql`
           edges {
             node {
               id
-              postId
               content
               agrees
               disagrees
@@ -38,7 +37,7 @@ class Profile extends Component {
   constructor() {
     super()
     this.state = {
-      id: '',
+      uid: '',
       currentTab: 0,
     }
   }
@@ -47,17 +46,19 @@ class Profile extends Component {
     AsyncStorage.getItem('UserSession', (error, data) => {
       const user = JSON.parse(data)
       if (user) {
-        this.setState({ id: user.uid })
+        this.setState({ uid: user.uid })
       }
     })
   }
 
   renderProfile = (props) => {
     const user = props.viewer.User
-    const savedPosts = user.savedPosts.edges  
+    const savedPosts = user.savedPosts.edges 
+    const noSavedPosts = 'You haven\'t saved any posts yet'
+    const noMyPosts = 'You haven\'t posted anything yet'
     const tabContent = [
-      savedPosts.length > 0 ? <SavedPosts posts={savedPosts} /> : <NoPosts />,
-      <MyPostsList />
+      savedPosts.length > 0 ? <SavedPosts posts={savedPosts} /> : <NoPosts msg={noSavedPosts} />,
+      <MyPosts uid={this.state.uid} />
     ]
 
     return (
@@ -80,9 +81,7 @@ class Profile extends Component {
       <QueryRenderer
         environment={environment}
         query={ProfileQuery}
-        variables={{
-          id: this.state.id
-        }}
+        variables={{ id: this.state.uid }}
         render={({ error, props}) => {
           if (error) {
             return <Text>{error.message}</Text>
