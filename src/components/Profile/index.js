@@ -6,7 +6,6 @@ import environment from '../../Environment'
 import UserDetails from './UserDetails'
 import MyPosts from './MyPosts'
 import SavedPosts from './SavedPosts'
-import NoPosts from './NoPosts'
 
 import styles from './styles'
 
@@ -18,16 +17,6 @@ const ProfileQuery = graphql`
         firstname
         lastname
         influence
-        savedPosts {
-          edges {
-            node {
-              id
-              content
-              agrees
-              disagrees
-            }
-          }
-        }
       }
     }
   }
@@ -53,11 +42,8 @@ class Profile extends Component {
 
   renderProfile = (props) => {
     const user = props.viewer.User
-    const savedPosts = user.savedPosts.edges 
-    const noSavedPosts = 'You haven\'t saved any posts yet'
-    const noMyPosts = 'You haven\'t posted anything yet'
     const tabContent = [
-      savedPosts.length > 0 ? <SavedPosts uid={this.state.uid} /> : <NoPosts msg={noSavedPosts} />,
+      <SavedPosts uid={this.state.uid} />,
       <MyPosts uid={this.state.uid} />
     ]
 

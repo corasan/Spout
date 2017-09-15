@@ -3,6 +3,7 @@ import { View, Text } from 'react-native'
 import { graphql, QueryRenderer } from 'react-relay'
 import environment from '../../../Environment'
 import MyPostsList from './MyPostsList'
+import NoPosts from '../NoPosts'
 
 const MyPostsQuery = graphql`
   query MyPostsQuery ($filter: PostFilter) {
@@ -33,7 +34,9 @@ const MyPosts = (props) => (
       if (error) {
         return <Text>{error.message}</Text>
       } else if (props) {
-        return <MyPostsList posts={props.viewer.allPosts.edges} />
+        const posts = props.viewer.allPosts.edges
+        const msg = 'You haven\'t posted anything yet'
+        return posts.length !== 0 ? <MyPostsList posts={posts} /> : <NoPosts msg={msg} />
       }
       return <Text>Loading</Text>
     }}
