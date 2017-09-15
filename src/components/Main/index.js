@@ -9,7 +9,7 @@ import TabBar from './tabBar'
 class Main extends Component {
   componentWillMount() {
     StatusBar.setHidden(false)
-    StatusBar.setBarStyle('dark-content', true)
+    StatusBar.setBarStyle('light-content', true)
   }
 
   render() {

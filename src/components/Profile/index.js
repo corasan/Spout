@@ -1,12 +1,82 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, AsyncStorage } from 'react-native'
+import { graphql, QueryRenderer } from 'react-relay'
+import AnimatedTabs from 'rn-animated-tabs';
+import environment from '../../Environment'
+import UserDetails from './UserDetails'
+import MyPosts from './MyPosts'
+import SavedPosts from './SavedPosts'
+
+import styles from './styles'
+
+const ProfileQuery = graphql`
+  query ProfileQuery($id: ID!) {
+    viewer {
+      User(id: $id) {
+        username
+        firstname
+        lastname
+        influence
+      }
+    }
+  }
+`
 
 class Profile extends Component {
+  constructor() {
+    super()
+    this.state = {
+      uid: '',
+      currentTab: 0,
+    }
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('UserSession', (error, data) => {
+      const user = JSON.parse(data)
+      if (user) {
+        this.setState({ uid: user.uid })
+      }
+    })
+  }
+
+  renderProfile = (props) => {
+    const user = props.viewer.User
+    const tabContent = [
+      <SavedPosts uid={this.state.uid} />,
+      <MyPosts uid={this.state.uid} />
+    ]
+
+    return (
+      <View style={styles.container}>
+        <UserDetails user={user}/>
+        <AnimatedTabs
+          tabTitles={['Saved Posts', 'My Posts']}
+          onChangeTab={(currentTab) => this.setState({ currentTab })}
+          activeTabIndicatorColor='#1ABC9C'
+          containerStyle={styles.tabContainerStyle}
+          tabTextStyle={{ fontFamily: 'Chalkboard SE' }}
+        />
+        {tabContent[this.state.currentTab]}
+      </View>
+    )
+  }
+
   render() {
     return (
-      <View>
-        <Text>Profile</Text>
-      </View>
+      <QueryRenderer
+        environment={environment}
+        query={ProfileQuery}
+        variables={{ id: this.state.uid }}
+        render={({ error, props}) => {
+          if (error) {
+            return <Text>{error.message}</Text>
+          } else if (props) {
+            return this.renderProfile(props)
+          }
+          return <Text>Loading</Text>
+        }}
+      />
     )
   }
 }

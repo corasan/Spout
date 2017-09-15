@@ -19,20 +19,21 @@ export default StyleSheet.create({
     borderRadius: 4,
   },
   postHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
+    flexDirection: 'column',
+    // justifyContent: 'space-between',
+    marginTop: 5,
   },
   timeAgoText: {
     fontSize: 12,
     color: LIGHT_TEXT,
     fontFamily: IOS_FONT,
+    backgroundColor: 'transparent',
   },
   usernameText: {
-    color: MAIN,
+    color: TINT,
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: 16,
+    marginBottom: -5,
     fontFamily: IOS_FONT,
   },
   postContentText: {
@@ -40,6 +41,7 @@ export default StyleSheet.create({
     marginBottom: 15,
     marginTop: 5,
     fontFamily: IOS_FONT,
+    fontWeight: '100',
   },
   leftCol: {
     flex: 0.2,
