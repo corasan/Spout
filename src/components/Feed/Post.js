@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import moment from 'moment'
+import _ from 'lodash'
 // import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 import {
   AgreeIcon,
@@ -9,17 +10,50 @@ import {
   AgreeIconPressed,
   DisagreeIconPressed,
 } from '../../ui/icons'
+import CreateAgree from '../../mutations/CreateAgreeMutation'
+import CreateDisagree from '../../mutations/CreateDisagreeMutation'
 
 import styles from './styles'
 
+// TODO: FIX ALL ISSUES RELATED TO POST
 class Post extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: '',
+      uid: '',
       agreePressed: false,
       disagreePressed: false,
+      currentAgree: '',
+      currentDisagree: '',
     }
+    this.agrees = this.props.post.node.agrees.edges
+    this.disagrees = this.props.post.node.disagrees.edges
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('UserSession', (err, data) => {
+      if (data) {
+        const session = JSON.parse(data)
+        this.setState({ uid: session.uid})
+      }
+    }).then(() => {
+      _.each(this.agrees, (agree) => {
+        if (_.includes(agree.node.user, this.state.uid)) {
+          this.setState({
+            agreePressed: true,
+            currentAgree: agree.node.id,
+          })
+        } 
+      })
+      _.each(this.disagrees, (disagree) => {
+        if (_.includes(disagree.node.user, this.state.uid)) {
+          this.setState({
+            disagreePressed: true,
+            currentDisagree: disagree.node.id,
+          })
+        } 
+      })
+    })
   }
 
   // renderDeletePost = (uid) => {
@@ -40,13 +74,24 @@ class Post extends Component {
   // }
 
   handleAgreeButton = (postId) => {
-    this.setState({ agreePressed: !this.state.agreePressed, disagreePressed: false })
-    // this.props.postAgree(postId, this.state.user.uid)
+    if (!this.state.agreePressed) {
+      CreateAgree(postId, this.state.uid, this.state.currentDisagree)
+      this.setState({
+        agreePressed: !this.state.agreePressed,
+        disagreePressed: false,
+      })
+    }
   }
-
+  // TODO: Fix toggle agree/disagree. When switching between agree/disagree
+  // it counts as many agrees/disagrees
   handleDisagreeButton = (postId) => {
-    this.setState({ disagreePressed: !this.state.disagreePressed, agreePressed: false })
-    // this.props.postDisagree(postId)
+    if (!this.state.disagreePressed) {
+      CreateDisagree(postId, this.state.uid, this.state.currentAgree)
+      this.setState({
+        disagreePressed: !this.state.disagreePressed,
+        agreePressed: false,
+      })
+    }
   }
 
   renderAgreeIcon = (postId) => {
@@ -118,7 +163,10 @@ class Post extends Component {
 
         <View style={styles.postRow}>
           <View style={[styles.postRow, { justifyContent: 'flex-start', marginTop: 4 }]}>
-            <TouchableOpacity style={{ marginTop: 1, marginRight: 12 }} onPress={() => this.handleAgreeButton(post.id)}>
+            <TouchableOpacity
+              style={{ marginTop: 1, marginRight: 12 }}
+              onPress={() => this.handleAgreeButton(post.id)}
+            >
               {this.renderAgreeIcon()}
             </TouchableOpacity>
 

@@ -40,9 +40,7 @@ export default (
     {
       mutation,
       variables,
-      onCompleted: (response) => {
-        SigninUser(email, password)
-      },
+      onCompleted: response => SigninUser(email, password),
       onError: err => console.error(err),
     },
   )

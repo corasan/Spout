@@ -2,20 +2,17 @@ import { commitMutation, graphql } from 'react-relay'
 import environment from '../Environment'
 
 const mutation = graphql`
-  mutation CreatePostMutation($input: CreatePostInput!) {
-    createPost(input: $input) {
-      post {
-        id
-      }
+  mutation DeleteAgreeMutation($input: DeleteAgreeInput!) {
+    deleteAgree(input: $input) {
+      deletedId
     }
   }
 `
 
-export default (content: string, authorId: string) => {
+export default (id) => {
   const variables = {
     input: {
-      content,
-      authorId,
+      id,
       clientMutationId: '',
     },
   }
@@ -27,6 +24,6 @@ export default (content: string, authorId: string) => {
       variables,
       onCompleted: response => console.log(response),
       onError: err => console.error(err)
-    },
+    }
   )
 }
