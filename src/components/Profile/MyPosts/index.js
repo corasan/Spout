@@ -8,7 +8,7 @@ import NoPosts from '../NoPosts'
 const MyPostsQuery = graphql`
   query MyPostsQuery ($filter: PostFilter) {
     viewer {
-      allPosts(filter: $filter) {
+      allPosts(filter: $filter, orderBy: createdAt_DESC) {
         edges {
           node {
             content
