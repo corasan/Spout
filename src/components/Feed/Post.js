@@ -72,19 +72,23 @@ class Post extends Component {
   renderLikeIcon = () => {
     const pressed = this.state.likePressed
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={styles.iconBox}>
         {pressed ? <LikeIconPressed /> : <LikeIcon />}
       </View>
     )
   }
 
-  renderSavePostIcon = () => {
-    return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+  renderSavePostIcon = () => (
+      <View style={styles.iconBox}>
         <SavePostIcon />
       </View>
-    )
-  }
+  )
+
+  renderMenuIcon = () => (
+    <View style={styles.iconBox}>
+      <MenuMore />
+    </View>
+  )
 
   // renderMenu = (uid, postId) => (
   //   <View>
@@ -109,10 +113,6 @@ class Post extends Component {
       // <MenuContext>
       <View style={styles.postBox}>
         <View style={styles.postRow}>
-          {/* <View style={styles.leftCol}>
-            <Image source={require('../../assets/user-male.png')} />
-          </View> */}
-
           <View style={styles.rightCol}>
             <View style={styles.postHeader}>
               <Text style={styles.usernameText}>{post.author.username}</Text>
@@ -126,23 +126,35 @@ class Post extends Component {
         <View style={styles.lineDivide} />
 
         <View style={styles.postRow}>
-          <View style={[styles.postRow, { justifyContent: 'flex-start', marginTop: 4 }]}>
-            <TouchableOpacity
-              style={{ marginTop: 2, marginRight: 12, marginLeft: 10 }}
-              onPress={() => this.handleLikeButton(post.id)}
-            >
-              {this.renderLikeIcon()}
-            </TouchableOpacity>
-            <Text style={styles.iconPostText}>
-              {`${post.agrees.count} ${peopleCount} this`}
-            </Text>
+          <View style={[styles.postRow, { justifyContent: 'space-between', marginTop: 4 }]}>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                style={{ marginTop: 2, marginRight: 12, marginLeft: 10 }}
+                onPress={() => this.handleLikeButton(post.id)}
+              >
+                {this.renderLikeIcon()}
+              </TouchableOpacity>
+              <Text style={styles.iconPostText}>
+                {`${post.agrees.count} ${peopleCount} this`}
+              </Text>
+            </View>
 
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                style={{ marginTop: 2, marginRight: 12, marginLeft: -18 }}
+                onPress={() => console.log('Save Pressed')}
+              >
+                {this.renderSavePostIcon()}
+              </TouchableOpacity>
+              <Text style={styles.iconPostText}>Save</Text>
+            </View>
+
+            
             <TouchableOpacity
-              style={{ marginTop: 2, marginRight: 12, marginLeft: 45 }}
+              style={{ marginTop: 2, marginRight: 10 }}
             >
-              {this.renderSavePostIcon()}
+              {this.renderMenuIcon()}
             </TouchableOpacity>
-            <Text style={styles.iconPostText}>Save</Text>
           </View>
 
 

@@ -61,7 +61,10 @@ export default StyleSheet.create({
     fontSize: 13,
     fontFamily: IOS_FONT,
     marginTop: 5,
-    marginLeft: -6,
+  },
+  iconBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   agreeAndDisagreeText: {
     fontSize: 11,
