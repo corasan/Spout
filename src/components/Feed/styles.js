@@ -56,7 +56,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  peopleLikeThis: {
+  iconPostText: {
     color: LIGHT_TEXT,
     fontSize: 13,
     fontFamily: IOS_FONT,

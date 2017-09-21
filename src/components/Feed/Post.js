@@ -5,13 +5,11 @@ import _ from 'lodash'
 // import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 import {
   LikeIcon,
-  DisagreeIcon,
   MenuMore,
   LikeIconPressed,
-  DisagreeIconPressed,
+  SavePostIcon,
 } from '../../ui/icons'
 import CreateAgree from '../../mutations/CreateAgreeMutation'
-import CreateDisagree from '../../mutations/CreateDisagreeMutation'
 
 import styles from './styles'
 
@@ -25,7 +23,6 @@ class Post extends Component {
       currentLike: '',
     }
     this.agrees = this.props.post.node.agrees.edges
-    this.disagrees = this.props.post.node.disagrees.edges
   }
 
   componentWillMount() {
@@ -81,6 +78,14 @@ class Post extends Component {
     )
   }
 
+  renderSavePostIcon = () => {
+    return (
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <SavePostIcon />
+      </View>
+    )
+  }
+
   // renderMenu = (uid, postId) => (
   //   <View>
   //     <Menu onSelect={value => this.handleMenuSelect(value, postId)}>
@@ -128,10 +133,18 @@ class Post extends Component {
             >
               {this.renderLikeIcon()}
             </TouchableOpacity>
-            <Text style={styles.peopleLikeThis}>
+            <Text style={styles.iconPostText}>
               {`${post.agrees.count} ${peopleCount} this`}
             </Text>
+
+            <TouchableOpacity
+              style={{ marginTop: 2, marginRight: 12, marginLeft: 45 }}
+            >
+              {this.renderSavePostIcon()}
+            </TouchableOpacity>
+            <Text style={styles.iconPostText}>Save</Text>
           </View>
+
 
           {/* <View style={{ justifyContent: 'flex-end' }}>
             {this.renderMenu(post.ownerUid, post.id)}

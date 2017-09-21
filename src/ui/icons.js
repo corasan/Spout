@@ -30,3 +30,11 @@ export const LikeIconPressed = () => (
 export const MenuMore = () => (
   <MaterialIcon name="more-horiz" size={24} color={DARKER_GRAY} style={{ marginBottom: 2 }} />
 )
+
+export const SavePostIcon = () => (
+  <Ionicons name="ios-bookmark-outline" size={22} color={DARKER_GRAY} />
+)
+
+// export const SavePostIconPressed = () => (
+//   <Ionicons name="ios-bookmark-outline" size={22} color={DARKER_GRAY} />
+// )
