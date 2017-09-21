@@ -29,9 +29,10 @@ export default StyleSheet.create({
     marginLeft: 15,
   },
   tabContainerStyle: {
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: -0.5 },
-    shadowOpacity: 0.05,
+    borderBottomColor: 'rgba(240, 240, 240, 0.6)',
+    borderBottomWidth: 1,
+    borderTopColor: 'rgba(240, 240, 240, 0.6)',
+    borderTopWidth: 1,
   },
   noPosts: {
     flex: 1,

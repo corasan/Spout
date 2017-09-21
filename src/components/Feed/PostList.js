@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Image, Text, TouchableOpacity, ListView, RefreshControl } from 'react-native'
+import { AdMobBanner } from 'react-native-admob'
 import Post from './Post'
 
 class PostList extends Component {
@@ -36,6 +37,12 @@ class PostList extends Component {
             //   titleColor="#34495E"
             // />
           // }
+        />
+        <AdMobBanner
+          bannerSize="banner"
+          adUnitID="ca-app-pub-3940256099942544/6300978111"
+          testDeviceID="CC128456-A318-4C83-9863-E9C924A81B87"
+          didFailToReceiveAdWithError={this.bannerError}
         />
       </View>
     )

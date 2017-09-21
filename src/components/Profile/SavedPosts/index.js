@@ -9,7 +9,7 @@ const SavedPostsQuery = graphql`
   query SavedPostsQuery($id: ID!) {
     viewer {
       User(id: $id) {
-        savedPosts {
+        savedPosts(orderBy: createdAt_DESC) {
           edges {
             node {
               id
