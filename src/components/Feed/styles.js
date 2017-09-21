@@ -1,23 +1,23 @@
 import { StyleSheet } from 'react-native'
-import { MAIN, TINT, LIGHT_TEXT, IOS_FONT, IOS_FONT_BOLD } from '../../ui/theme'
+import { MAIN, TINT, LIGHT_TEXT, IOS_FONT, IOS_FONT_BOLD, BORDER_COLOR } from '../../ui/theme'
 
 export default StyleSheet.create({
   feedContainer: {
     flex: 1,
-    marginTop: 70,
+    // marginTop: 70,
   },
   // Styles for posts/post list
   postBox: {
     backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.18,
-    shadowRadius: 2,
+    paddingHorizontal: 22,
+    paddingTop: 10,
+    paddingBottom: 6,
     marginBottom: 8,
     marginTop: 8,
-    borderRadius: 4,
+    borderBottomColor: BORDER_COLOR,
+    borderBottomWidth: 1,
+    borderTopColor: BORDER_COLOR,
+    borderTopWidth: 1,
   },
   postHeader: {
     flexDirection: 'column',
@@ -34,15 +34,15 @@ export default StyleSheet.create({
     color: TINT,
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: -5,
     fontFamily: IOS_FONT,
   },
   postContentText: {
     color: TINT,
     marginBottom: 15,
-    marginTop: 5,
+    marginTop: 16,
     fontFamily: IOS_FONT,
     fontWeight: '100',
+    fontSize: 14,
   },
   leftCol: {
     flex: 0.2,
@@ -56,23 +56,12 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  agreeAndDisagreeButton: {
-    color: '#a7a7a7',
-    fontSize: 12,
-    fontFamily: IOS_FONT_BOLD,
-    fontWeight: '100',
-  },
-  commentsCount: {
-    position: 'absolute',
-    backgroundColor: 'transparent',
-    top: 8,
-    right: 85,
-    fontSize: 11,
-    color: MAIN,
+  peopleLikeThis: {
+    color: LIGHT_TEXT,
+    fontSize: 13,
     fontFamily: IOS_FONT,
-  },
-  icons: {
-    marginRight: 6,
+    marginTop: 5,
+    marginLeft: -6,
   },
   agreeAndDisagreeText: {
     fontSize: 11,
@@ -80,15 +69,13 @@ export default StyleSheet.create({
   },
   lineDivide: {
     flex: 1,
-    borderWidth: 0.4,
-    borderColor: LIGHT_TEXT,
-    marginTop: 4,
+    borderWidth: 0.6,
+    borderColor: BORDER_COLOR,
+    marginTop: 20,
   },
   header: {
     height:86,
     backgroundColor: 'white',
-    // borderBottomColor: '#F7F7F7',
-    // borderBottomWidth: 1,
     alignItems: 'center',    
   },
   headerTitle: {
@@ -100,7 +87,7 @@ export default StyleSheet.create({
   },
   tabStyle: {
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F2F2',
+    borderBottomColor: BORDER_COLOR,
     // height: 29,
     paddingBottom: 0,
     backgroundColor: 'white',

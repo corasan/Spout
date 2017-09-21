@@ -30,7 +30,7 @@ class RecentPostsList extends Component {
           dataSource={this.state.dataSource.cloneWithRows(this.props.posts.edges)}
           renderRow={this.renderRow}
           enableEmptySections
-          style={{ paddingHorizontal: 16, paddingTop: 5 }}
+          style={{ paddingTop: 5 }}
           // refreshControl={
             // <RefreshControl
             //   refreshing={this.props.refreshing}

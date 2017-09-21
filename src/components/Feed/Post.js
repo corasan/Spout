@@ -4,10 +4,10 @@ import moment from 'moment'
 import _ from 'lodash'
 // import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 import {
-  AgreeIcon,
+  LikeIcon,
   DisagreeIcon,
   MenuMore,
-  AgreeIconPressed,
+  LikeIconPressed,
   DisagreeIconPressed,
 } from '../../ui/icons'
 import CreateAgree from '../../mutations/CreateAgreeMutation'
@@ -21,10 +21,8 @@ class Post extends Component {
     super(props)
     this.state = {
       uid: '',
-      agreePressed: false,
-      disagreePressed: false,
-      currentAgree: '',
-      currentDisagree: '',
+      likePressed: false,
+      currentLike: '',
     }
     this.agrees = this.props.post.node.agrees.edges
     this.disagrees = this.props.post.node.disagrees.edges
@@ -40,16 +38,8 @@ class Post extends Component {
       _.each(this.agrees, (agree) => {
         if (_.includes(agree.node.user, this.state.uid)) {
           this.setState({
-            agreePressed: true,
-            currentAgree: agree.node.id,
-          })
-        } 
-      })
-      _.each(this.disagrees, (disagree) => {
-        if (_.includes(disagree.node.user, this.state.uid)) {
-          this.setState({
-            disagreePressed: true,
-            currentDisagree: disagree.node.id,
+            likePressed: true,
+            currentLike: agree.node.id,
           })
         } 
       })
@@ -73,47 +63,20 @@ class Post extends Component {
   //   }
   // }
 
-  handleAgreeButton = (postId) => {
-    if (!this.state.agreePressed) {
+  handleLikeButton = (postId) => {
+    if (!this.state.likePressed) {
       CreateAgree(postId, this.state.uid, this.state.currentDisagree)
       this.setState({
-        agreePressed: !this.state.agreePressed,
-        disagreePressed: false,
-      })
-    }
-  }
-  // TODO: Fix toggle agree/disagree. When switching between agree/disagree
-  // it counts as many agrees/disagrees
-  handleDisagreeButton = (postId) => {
-    if (!this.state.disagreePressed) {
-      CreateDisagree(postId, this.state.uid, this.state.currentAgree)
-      this.setState({
-        disagreePressed: !this.state.disagreePressed,
-        agreePressed: false,
+        likePressed: !this.state.likePressed,
       })
     }
   }
 
-  renderAgreeIcon = (postId) => {
-    const pressed = this.state.agreePressed
+  renderLikeIcon = () => {
+    const pressed = this.state.likePressed
     return (
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={styles.icons}>
-          {pressed ? <AgreeIconPressed /> : <AgreeIcon />}
-        </View>
-        <Text style={[styles.agreeAndDisagreeButton, { color: pressed ? '#1ABC9C' : '#bcbcbc' }]}>Agree</Text>
-      </View>
-    )
-  }
-
-  renderDisagreeIcon = () => {
-    const pressed = this.state.disagreePressed
-    return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={[styles.icons, { marginTop: 5 }]}>
-          {pressed ? <DisagreeIconPressed /> : <DisagreeIcon />}
-        </View>
-        <Text style={[styles.agreeAndDisagreeButton, { color: pressed ? '#1ABC9C' : '#bcbcbc' }]}>Disagree</Text>
+        {pressed ? <LikeIconPressed /> : <LikeIcon />}
       </View>
     )
   }
@@ -136,13 +99,14 @@ class Post extends Component {
 
   render() {
     const post = this.props.post.node
+    const peopleCount = post.agrees.count === 1 ? 'person likes' : 'people like'
     return (
       // <MenuContext>
       <View style={styles.postBox}>
         <View style={styles.postRow}>
-          <View style={styles.leftCol}>
+          {/* <View style={styles.leftCol}>
             <Image source={require('../../assets/user-male.png')} />
-          </View>
+          </View> */}
 
           <View style={styles.rightCol}>
             <View style={styles.postHeader}>
@@ -154,25 +118,19 @@ class Post extends Component {
 
         <Text style={styles.postContentText}>{post.content}</Text>
 
-        <View style={{ marginTop: 18, flexDirection: 'row' }}>
-          <Text style={[styles.agreeAndDisagreeText, { marginRight: 6 }]}>{post.agrees.count} agree</Text>
-          <Text style={styles.agreeAndDisagreeText}>{post.disagrees.count} disagree</Text>
-        </View>
-
         <View style={styles.lineDivide} />
 
         <View style={styles.postRow}>
           <View style={[styles.postRow, { justifyContent: 'flex-start', marginTop: 4 }]}>
             <TouchableOpacity
-              style={{ marginTop: 1, marginRight: 12 }}
-              onPress={() => this.handleAgreeButton(post.id)}
+              style={{ marginTop: 2, marginRight: 12, marginLeft: 10 }}
+              onPress={() => this.handleLikeButton(post.id)}
             >
-              {this.renderAgreeIcon()}
+              {this.renderLikeIcon()}
             </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => this.handleDisagreeButton(post.id)}>
-              {this.renderDisagreeIcon()}
-            </TouchableOpacity>
+            <Text style={styles.peopleLikeThis}>
+              {`${post.agrees.count} ${peopleCount} this`}
+            </Text>
           </View>
 
           {/* <View style={{ justifyContent: 'flex-end' }}>

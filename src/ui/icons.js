@@ -5,10 +5,6 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { MAIN, LIGHT_TEXT, TINT, DARKER_GRAY } from './theme'
 
-export const FeedIcon = () => (
-  <SimpleLineIcons name="feed" size={46} color={MAIN} />
-)
-
 export class CreatePostIcon extends Component {
   setNativeProps(nativeProps) {
     this.createPost.setNativeProps(nativeProps)
@@ -23,20 +19,12 @@ export class CreatePostIcon extends Component {
   }
 }
 
-export const AgreeIcon = () => (
-  <Ionicons name="ios-thumbs-up" size={14} color={DARKER_GRAY} />
+export const LikeIcon = () => (
+  <Ionicons name="ios-heart-outline" size={22} color={DARKER_GRAY} />
 )
 
-export const DisagreeIcon = () => (
-  <Ionicons name="ios-thumbs-down" size={14} color={DARKER_GRAY} />
-)
-
-export const AgreeIconPressed = () => (
-  <Ionicons name="ios-thumbs-up" size={14} color={MAIN} />
-)
-
-export const DisagreeIconPressed = () => (
-  <Ionicons name="ios-thumbs-down" size={14} color={MAIN} />
+export const LikeIconPressed = () => (
+  <Ionicons name="ios-heart" size={22} color='#E74C3C' />
 )
 
 export const MenuMore = () => (
