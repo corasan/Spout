@@ -84,4 +84,37 @@ export default StyleSheet.create({
     borderColor: LIGHT_TEXT,
     marginTop: 4,
   },
+  header: {
+    height:86,
+    backgroundColor: 'white',
+    // borderBottomColor: '#F7F7F7',
+    // borderBottomWidth: 1,
+    alignItems: 'center',    
+  },
+  headerTitle: {
+    marginTop: 20,
+    fontSize: 26,
+    fontWeight: 'bold',
+    fontFamily: IOS_FONT,
+    color: TINT,
+  },
+  tabStyle: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#F1F2F2',
+    // height: 29,
+    paddingBottom: 0,
+    backgroundColor: 'white',
+    marginTop: -15,
+  },
+  tabBarTextStyle: {
+    fontFamily: IOS_FONT,
+    fontSize: 24,
+    letterSpacing: 1,
+  },
+  tabBarUnderlineStyle: {
+    backgroundColor: MAIN,
+    width: 70,
+    left: 68,
+    marginBottom: 10,
+  },
 })
