@@ -25,9 +25,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
-  appBackground: {
-    backgroundColor: BACKGROUND_GRAY,
-  },
 })
 
 class Routes extends Component {
@@ -54,7 +51,11 @@ class Routes extends Component {
 
   render() {
     return (
-      <Router navigationBarStyle={styles.navBar} titleStyle={styles.title}>
+      <Router
+        navigationBarStyle={styles.navBar}
+        titleStyle={styles.title}
+        sceneStyle={{ backgroundColor: BACKGROUND_GRAY }}
+      >
         <Scene key="root">
           <Scene key="login" component={Login} hideNavBar />
           <Scene key="signup" component={Signup} hideNavBar />
@@ -66,7 +67,6 @@ class Routes extends Component {
             titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
             hideBackImage
             renderRightButton={() => this.renderRightButton()}
-            sceneStyle={styles.appBackground}
           />
           <Scene
             key="createPost"
