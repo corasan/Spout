@@ -13,7 +13,7 @@ export class CreatePostIcon extends Component {
   render() {
     return (
       <View ref={thisComponent => this.createPost = thisComponent}>
-        <SimpleLineIcons name="note" size={22} color='white' />
+        <SimpleLineIcons name="note" size={22} color={MAIN} />
       </View>
     )
   }

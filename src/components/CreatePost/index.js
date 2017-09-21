@@ -42,6 +42,7 @@ class CreatePost extends Component {
   }
 
   closeModal = () => {
+    // TODO: fix Actions.pop transition animation
     this.setState({ createPostVisible: !this.state.createPostVisible })
     Actions.pop()
   }

@@ -79,7 +79,8 @@ export default StyleSheet.create({
   header: {
     height:86,
     backgroundColor: 'white',
-    alignItems: 'center',    
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
   headerTitle: {
     marginTop: 20,
