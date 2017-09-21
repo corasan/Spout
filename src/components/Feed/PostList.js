@@ -40,7 +40,7 @@ class PostList extends Component {
         />
         <AdMobBanner
           bannerSize="banner"
-          adUnitID="ca-app-pub-6893917161539964/9616597542"
+          adUnitID="ca-app-pub-3940256099942544/6300978111"
           testDeviceID="CC128456-A318-4C83-9863-E9C924A81B87"
           didFailToReceiveAdWithError={this.bannerError}
         />
