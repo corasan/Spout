@@ -38,3 +38,7 @@ export const SavePostIcon = () => (
 // export const SavePostIconPressed = () => (
 //   <Ionicons name="ios-bookmark-outline" size={22} color={DARKER_GRAY} />
 // )
+
+export const EraseAllIcon = () => (
+  <Ionicons name="ios-backspace-outline" size={30} color={MAIN} />
+)

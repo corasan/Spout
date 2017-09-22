@@ -92,7 +92,6 @@ export default StyleSheet.create({
   tabStyle: {
     borderBottomWidth: 1,
     borderBottomColor: BORDER_COLOR,
-    // height: 29,
     paddingBottom: 0,
     backgroundColor: 'white',
     marginTop: -15,

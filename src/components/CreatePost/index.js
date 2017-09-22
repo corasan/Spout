@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, View, Text, TouchableOpacity, Image, TextInput, Dimensions, Alert, AsyncStorage } from 'react-native'
+import {
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Dimensions,
+  Alert,
+  AsyncStorage,
+  KeyboardAvoidingView,
+} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import CreateNewPost from '../../mutations/CreatePostMutation'
+import { EraseAllIcon } from '../../ui/icons'
 
 import styles from './styles'
 
@@ -20,6 +32,7 @@ class CreatePost extends Component {
       content: '',
       createPostVisible: this.props.createPostVisible,
       author: '',
+      username: ''
     }
   }
 
@@ -27,7 +40,7 @@ class CreatePost extends Component {
     AsyncStorage.getItem('UserSession', (err, data) => {
       if (data) {
         const user = JSON.parse(data)
-        this.setState({ author: user.uid})
+        this.setState({ author: user.uid, username: user.username })
       } else {
         console.error(err)
       }
@@ -37,7 +50,7 @@ class CreatePost extends Component {
   renderCharactersLeft = () => {
     const left = charLimit - this.state.content.length
     return (
-      <Text style={[styles.charsLeft, { color: left <= 10 ? 'red' : '#34495E' }]}>{left}</Text>
+      <Text style={[styles.charsLeft, { color: left <= 10 ? 'red' : '#D7D7D7' }]}>{left}</Text>
     )
   }
 
@@ -64,14 +77,18 @@ class CreatePost extends Component {
         visible={this.state.createPostVisible}
         onRequestClose={() => Actions.pop()}
       >
-        <TouchableOpacity onPress={() => this.closeModal()} style={styles.closeModalBtn}>
-          <Image source={require('../../assets/close.png')} style={styles.closeModalIcon} />
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'column' }}>
+          <View>
+            <Text style={styles.username}>{this.state.username}</Text>
+            <TouchableOpacity onPress={() => this.closeModal()} style={styles.closeModalBtn}>
+              <Image source={require('../../assets/close.png')} style={styles.closeModalIcon} />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.createPostContainer}>
-          <Text style={styles.tellTheWorld}>Tell us what you are feeling... Let it out!</Text>
-          <View style={{ width: width - 40 }}>
+          <View style={{ width, marginTop: 50 }}>
             <TextInput
+              placeholder="Say Something..."
+              placeholderTextColor="#34495E"
               multiline
               autoFocus
               maxLength={charLimit}
@@ -88,15 +105,21 @@ class CreatePost extends Component {
                 this.setState({ content })
               }}
               value={this.state.content}
-              style={[styles.postInput, { height: Math.max(140, this.state.height) }]}
+              style={[styles.postInput, { height: Math.max(383, this.state.height) }]}
             />
-            <View style={{ position: 'absolute', right: 4, bottom: 2, opacity: 0.2 }}>
-              {this.renderCharactersLeft()}
-            </View>
+            
           </View>
 
-          <View style={styles.sendPostBtnContainer}>
-            <TouchableOpacity style={styles.senPostBtn} onPress={() => this.createNewPost()}>
+          <View style={[styles.postBarBox, { width }]}>
+            <View style={{ left: 0, position: 'absolute', marginLeft: 20 }}>
+              <EraseAllIcon />
+            </View>
+
+            <View>
+              {this.renderCharactersLeft()}
+            </View>
+
+            <TouchableOpacity style={styles.sendPostBtn} onPress={() => this.createNewPost()}>
               <Text style={styles.sendPostText}>Post</Text>
             </TouchableOpacity>
           </View>
@@ -107,3 +130,47 @@ class CreatePost extends Component {
 }
 
 export default CreatePost
+
+// <View>
+// <Text style={styles.username}>{this.state.username}</Text>
+// <TouchableOpacity onPress={() => this.closeModal()} style={styles.closeModalBtn}>
+//   <Image source={require('../../assets/close.png')} style={styles.closeModalIcon} />
+// </TouchableOpacity>
+// </View>
+
+// <KeyboardAvoidingView
+// behavior="position"
+// keyboardVerticalOffset={0}
+// >
+// <View style={styles.createPostContainer}>
+//   <View style={{ width }}>
+//     <TextInput
+//       multiline
+//       autoFocus
+//       maxLength={charLimit}
+//       returnKeyType="send"
+//       onContentSizeChange={(event) => {
+//         this.setState({ height: event.nativeEvent.contentSize.height })
+//       }}
+//       onKeyPress={(event) => {
+//         if (event.nativeEvent.key === 'Enter') {
+//           this.createNewPost()
+//         }
+//       }}
+//       onChangeText={(content) => {
+//         this.setState({ content })
+//       }}
+//       value={this.state.content}
+//       style={[styles.postInput, { height: Math.max(310, this.state.height) }]}
+//     />
+//     <View style={{ position: 'absolute', right: 4, bottom: 2, opacity: 0.2 }}>
+//       {this.renderCharactersLeft()}
+//     </View>
+//   </View>
+// </View>
+// <View style={{ backgroundColor: 'red', width, bottom: 0, position: 'absolute' }}>
+//   <TouchableOpacity style={styles.sendPostBtn} onPress={() => this.createNewPost()}>
+//     <Text style={styles.sendPostText}>Post</Text>
+//   </TouchableOpacity>
+// </View>
+// </KeyboardAvoidingView>

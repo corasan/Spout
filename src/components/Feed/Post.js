@@ -22,7 +22,7 @@ class Post extends Component {
       likePressed: false,
       currentLike: '',
     }
-    this.agrees = this.props.post.node.agrees.edges
+    this.likes = this.props.post.node.agrees.edges
   }
 
   componentWillMount() {
@@ -32,7 +32,7 @@ class Post extends Component {
         this.setState({ uid: session.uid})
       }
     }).then(() => {
-      _.each(this.agrees, (agree) => {
+      _.each(this.likes, (agree) => {
         if (_.includes(agree.node.user, this.state.uid)) {
           this.setState({
             likePressed: true,
