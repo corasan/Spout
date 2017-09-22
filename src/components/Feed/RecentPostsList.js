@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Image, Text, TouchableOpacity, ListView, RefreshControl } from 'react-native'
+import { View, Image, Text, TouchableOpacity, ListView, RefreshControl, StatusBar } from 'react-native'
 import { AdMobBanner } from 'react-native-admob'
 import Post from './Post'
 
-class PostList extends Component {
+import styles from './styles'
+
+class RecentPostsList extends Component {
   static propTypes = {
-    viewer: PropTypes.objectOf(PropTypes.object).isRequired,
+    posts: PropTypes.objectOf(PropTypes.array).isRequired,
   }
 
   constructor(props) {
     super(props)
+    StatusBar.setBarStyle('dark-content', true)
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
     }
@@ -24,10 +27,10 @@ class PostList extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ListView
-          dataSource={this.state.dataSource.cloneWithRows(this.props.viewer.allPosts.edges)}
+          dataSource={this.state.dataSource.cloneWithRows(this.props.posts.edges)}
           renderRow={this.renderRow}
           enableEmptySections
-          style={{ paddingHorizontal: 16 }}
+          style={{ paddingTop: 5 }}
           // refreshControl={
             // <RefreshControl
             //   refreshing={this.props.refreshing}
@@ -49,4 +52,4 @@ class PostList extends Component {
   }
 }
 
-export default PostList
+export default RecentPostsList

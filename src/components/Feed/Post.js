@@ -4,14 +4,12 @@ import moment from 'moment'
 import _ from 'lodash'
 // import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu'
 import {
-  AgreeIcon,
-  DisagreeIcon,
+  LikeIcon,
   MenuMore,
-  AgreeIconPressed,
-  DisagreeIconPressed,
+  LikeIconPressed,
+  SavePostIcon,
 } from '../../ui/icons'
 import CreateAgree from '../../mutations/CreateAgreeMutation'
-import CreateDisagree from '../../mutations/CreateDisagreeMutation'
 
 import styles from './styles'
 
@@ -21,13 +19,10 @@ class Post extends Component {
     super(props)
     this.state = {
       uid: '',
-      agreePressed: false,
-      disagreePressed: false,
-      currentAgree: '',
-      currentDisagree: '',
+      likePressed: false,
+      currentLike: '',
     }
-    this.agrees = this.props.post.node.agrees.edges
-    this.disagrees = this.props.post.node.disagrees.edges
+    this.likes = this.props.post.node.agrees.edges
   }
 
   componentWillMount() {
@@ -37,19 +32,11 @@ class Post extends Component {
         this.setState({ uid: session.uid})
       }
     }).then(() => {
-      _.each(this.agrees, (agree) => {
+      _.each(this.likes, (agree) => {
         if (_.includes(agree.node.user, this.state.uid)) {
           this.setState({
-            agreePressed: true,
-            currentAgree: agree.node.id,
-          })
-        } 
-      })
-      _.each(this.disagrees, (disagree) => {
-        if (_.includes(disagree.node.user, this.state.uid)) {
-          this.setState({
-            disagreePressed: true,
-            currentDisagree: disagree.node.id,
+            likePressed: true,
+            currentLike: agree.node.id,
           })
         } 
       })
@@ -73,50 +60,35 @@ class Post extends Component {
   //   }
   // }
 
-  handleAgreeButton = (postId) => {
-    if (!this.state.agreePressed) {
+  handleLikeButton = (postId) => {
+    if (!this.state.likePressed) {
       CreateAgree(postId, this.state.uid, this.state.currentDisagree)
       this.setState({
-        agreePressed: !this.state.agreePressed,
-        disagreePressed: false,
-      })
-    }
-  }
-  // TODO: Fix toggle agree/disagree. When switching between agree/disagree
-  // it counts as many agrees/disagrees
-  handleDisagreeButton = (postId) => {
-    if (!this.state.disagreePressed) {
-      CreateDisagree(postId, this.state.uid, this.state.currentAgree)
-      this.setState({
-        disagreePressed: !this.state.disagreePressed,
-        agreePressed: false,
+        likePressed: !this.state.likePressed,
       })
     }
   }
 
-  renderAgreeIcon = (postId) => {
-    const pressed = this.state.agreePressed
+  renderLikeIcon = () => {
+    const pressed = this.state.likePressed
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={styles.icons}>
-          {pressed ? <AgreeIconPressed /> : <AgreeIcon />}
-        </View>
-        <Text style={[styles.agreeAndDisagreeButton, { color: pressed ? '#1ABC9C' : '#bcbcbc' }]}>Agree</Text>
+      <View style={styles.iconBox}>
+        {pressed ? <LikeIconPressed /> : <LikeIcon />}
       </View>
     )
   }
 
-  renderDisagreeIcon = () => {
-    const pressed = this.state.disagreePressed
-    return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={[styles.icons, { marginTop: 5 }]}>
-          {pressed ? <DisagreeIconPressed /> : <DisagreeIcon />}
-        </View>
-        <Text style={[styles.agreeAndDisagreeButton, { color: pressed ? '#1ABC9C' : '#bcbcbc' }]}>Disagree</Text>
+  renderSavePostIcon = () => (
+      <View style={styles.iconBox}>
+        <SavePostIcon />
       </View>
-    )
-  }
+  )
+
+  renderMenuIcon = () => (
+    <View style={styles.iconBox}>
+      <MenuMore />
+    </View>
+  )
 
   // renderMenu = (uid, postId) => (
   //   <View>
@@ -136,14 +108,11 @@ class Post extends Component {
 
   render() {
     const post = this.props.post.node
+    const peopleCount = post.agrees.count === 1 ? 'person likes' : 'people like'
     return (
       // <MenuContext>
       <View style={styles.postBox}>
         <View style={styles.postRow}>
-          <View style={styles.leftCol}>
-            <Image source={require('../../assets/user-male.png')} />
-          </View>
-
           <View style={styles.rightCol}>
             <View style={styles.postHeader}>
               <Text style={styles.usernameText}>{post.author.username}</Text>
@@ -154,26 +123,40 @@ class Post extends Component {
 
         <Text style={styles.postContentText}>{post.content}</Text>
 
-        <View style={{ marginTop: 18, flexDirection: 'row' }}>
-          <Text style={[styles.agreeAndDisagreeText, { marginRight: 6 }]}>{post.agrees.count} agree</Text>
-          <Text style={styles.agreeAndDisagreeText}>{post.disagrees.count} disagree</Text>
-        </View>
-
         <View style={styles.lineDivide} />
 
         <View style={styles.postRow}>
-          <View style={[styles.postRow, { justifyContent: 'flex-start', marginTop: 4 }]}>
-            <TouchableOpacity
-              style={{ marginTop: 1, marginRight: 12 }}
-              onPress={() => this.handleAgreeButton(post.id)}
-            >
-              {this.renderAgreeIcon()}
-            </TouchableOpacity>
+          <View style={[styles.postRow, { justifyContent: 'space-between', marginTop: 4 }]}>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                style={{ marginTop: 2, marginRight: 12, marginLeft: 10 }}
+                onPress={() => this.handleLikeButton(post.id)}
+              >
+                {this.renderLikeIcon()}
+              </TouchableOpacity>
+              <Text style={styles.iconPostText}>
+                {`${post.agrees.count} ${peopleCount} this`}
+              </Text>
+            </View>
 
-            <TouchableOpacity onPress={() => this.handleDisagreeButton(post.id)}>
-              {this.renderDisagreeIcon()}
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                style={{ marginTop: 2, marginRight: 12, marginLeft: -18 }}
+                onPress={() => console.log('Save Pressed')}
+              >
+                {this.renderSavePostIcon()}
+              </TouchableOpacity>
+              <Text style={styles.iconPostText}>Save</Text>
+            </View>
+
+            
+            <TouchableOpacity
+              style={{ marginTop: 2, marginRight: 10 }}
+            >
+              {this.renderMenuIcon()}
             </TouchableOpacity>
           </View>
+
 
           {/* <View style={{ justifyContent: 'flex-end' }}>
             {this.renderMenu(post.ownerUid, post.id)}

@@ -54,17 +54,16 @@ class Routes extends Component {
       <Router
         navigationBarStyle={styles.navBar}
         titleStyle={styles.title}
-        sceneStyle={{ backgroundColor: BACKGROUND_GRAY }}
+        sceneStyle={{ backgroundColor: '#F7F7F7' }}
       >
-        <Scene key="root">
-          <Scene key="login" component={Login} hideNavBar />
-          <Scene key="signup" component={Signup} hideNavBar />
+        <Scene key="root" hideNavBar>
+          <Scene key="login" component={Login} />
+          <Scene key="signup" component={Signup} />
           <Scene
             key="main"
             component={Main}
-            hideNavBar={false}
             // title="Feed"
-            titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
+            // titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
             hideBackImage
             renderRightButton={() => this.renderRightButton()}
           />
@@ -72,7 +71,6 @@ class Routes extends Component {
             key="createPost"
             component={CreatePost}
             visible={this.state.createPostVisible}
-            hideNavBar
             direction="vertical"
           />
         </Scene>
