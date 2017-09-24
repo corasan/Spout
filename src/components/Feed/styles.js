@@ -4,7 +4,6 @@ import { MAIN, TINT, LIGHT_TEXT, IOS_FONT, IOS_FONT_BOLD, BORDER_COLOR } from '.
 export default StyleSheet.create({
   feedContainer: {
     flex: 1,
-    // marginTop: 70,
   },
   // Styles for posts/post list
   postBox: {
@@ -21,7 +20,6 @@ export default StyleSheet.create({
   },
   postHeader: {
     flexDirection: 'column',
-    // justifyContent: 'space-between',
     marginTop: 5,
   },
   timeAgoText: {

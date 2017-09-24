@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux'
 import RecentPostsList from './RecentPostsList'
 import PopularPostsList from './PopularPostsList'
 import { CreatePostIcon } from '../../ui/icons'
-import { LIGHT_TEXT, TINT } from '../../ui/theme'
+import { DARKER_GRAY, TINT } from '../../ui/theme'
 
 import styles from './styles'
 
@@ -38,7 +38,7 @@ class PostFeed extends Component {
               style={styles.tabStyle}
             />
           )}
-          tabBarInactiveTextColor={LIGHT_TEXT}
+          tabBarInactiveTextColor={DARKER_GRAY}
           tabBarActiveTextColor={TINT}
           tabBarTextStyle={styles.tabBarTextStyle}
           tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
