@@ -51,7 +51,7 @@ export default StyleSheet.create({
   settingsSection: {
     marginTop: 25,
   },
-  settingsSectionTittle: {
+  settingsSectionTitle: {
     marginLeft: 30,
     fontSize: 16,
     fontFamily: IOS_FONT,

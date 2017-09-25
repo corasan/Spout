@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { TextSetting, SettingsSection } from './Settings'
 
 import styles from './styles'
-
-const { width } = Dimensions.get('window')
 
 class Settings extends Component {
   render() {
@@ -33,15 +32,9 @@ class Settings extends Component {
           </View>
         </View>
 
-        <View style={styles.settingsSection}>
-          <Text style={styles.settingsSectionTittle}>Profile</Text>
-
-          <View style={[styles.settingOptionContainer, { width }]}>
-            <Text style={styles.settingOptionLabel}>Name</Text>
-
-            <Text style={styles.settingOptionData}>Henry Paulino</Text>
-          </View>
-        </View>
+        <SettingsSection sectionTitle="Profile">
+          <TextSetting label="Name" data="Henry Paulino" />
+        </SettingsSection>
       </View>
     )
   }
