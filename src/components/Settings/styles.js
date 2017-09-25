@@ -81,4 +81,8 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 150,
   },
+  // EditView styles
+  topBar: {
+    height: 55,
+  },
 })

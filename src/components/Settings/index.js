@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { TextSetting, SettingsSection } from './Settings'
+import { EditSetting, SettingsSection } from './Settings'
 
 import styles from './styles'
 
@@ -33,9 +33,9 @@ class Settings extends Component {
         </View>
 
         <SettingsSection sectionTitle="Profile">
-          <TextSetting label="Name" data="Henry Paulino" />
-          <TextSetting label="Username" data="corasan" />
-          <TextSetting label="Email" data="henrypl360@gmail.com" />
+          <EditSetting label="Name" data="Henry Paulino" />
+          <EditSetting label="Username" data="corasan" />
+          <EditSetting label="Email" data="henrypl360@gmail.com" />
         </SettingsSection>
       </View>
     )
