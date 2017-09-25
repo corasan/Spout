@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native'
+import { View, Text, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import styles from './styles'
+
+const { width } = Dimensions.get('window')
 
 class Settings extends Component {
   render() {
@@ -20,9 +22,7 @@ class Settings extends Component {
 
               <TouchableOpacity onPress={() => {
                 AsyncStorage.removeItem('UserSession', (error) => {
-                    if (!error) {
-                      Actions.login()
-                    }
+                    if (!error) Actions.login()
                   })
                 }}
                 style={styles.logoutBtn}
@@ -33,6 +33,15 @@ class Settings extends Component {
           </View>
         </View>
 
+        <View style={styles.settingsSection}>
+          <Text style={styles.settingsSectionTittle}>Profile</Text>
+
+          <View style={[styles.settingOptionContainer, { width }]}>
+            <Text style={styles.settingOptionLabel}>Name</Text>
+
+            <Text style={styles.settingOptionData}>Henry Paulino</Text>
+          </View>
+        </View>
       </View>
     )
   }

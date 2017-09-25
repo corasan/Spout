@@ -36,7 +36,7 @@ export default StyleSheet.create({
   },
   noPostsText: {
     fontSize: 24,
-    fontFamily: IOS_FONT_BOLD,
+    fontFamily: IOS_FONT,
     color: DARKER_GRAY,
   },
   post: {

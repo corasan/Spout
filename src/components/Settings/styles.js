@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import { MAIN, TINT, LIGHT_TEXT, IOS_FONT, IOS_FONT_BOLD, DARKER_GRAY } from '../../ui/theme'
+import { MAIN, TINT, LIGHT_TEXT, IOS_FONT, BORDER_COLOR, DARKER_GRAY } from '../../ui/theme'
 
 export default StyleSheet.create({
   userArea: {
     backgroundColor: 'white',
     paddingTop: 28,
-    paddingLeft: 26,
+    paddingLeft: 30,
     paddingBottom: 20,
   },
   settingsText: {
@@ -47,5 +47,39 @@ export default StyleSheet.create({
     fontSize: 14,
     color: 'white',
     fontFamily: IOS_FONT,
+  },
+  settingsSection: {
+    marginTop: 25,
+  },
+  settingsSectionTittle: {
+    marginLeft: 30,
+    fontSize: 16,
+    fontFamily: IOS_FONT,
+    color: DARKER_GRAY,
+    marginBottom: 5,
+  },
+  settingOptionContainer: {
+    height: 55,
+    backgroundColor: 'white',
+    borderBottomColor: BORDER_COLOR,
+    borderBottomWidth: 1,
+    borderTopColor: BORDER_COLOR,
+    borderTopWidth: 1,
+    paddingHorizontal: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  settingOptionLabel: {
+    fontSize: 16,
+    color: DARKER_GRAY,
+    fontFamily: IOS_FONT,
+    backgroundColor: 'transparent',
+  },
+  settingOptionData: {
+    fontSize: 18,
+    color: TINT,
+    fontFamily: IOS_FONT,
+    backgroundColor: 'transparent',
+    left: 60,
   },
 })
