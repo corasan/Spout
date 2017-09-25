@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
     height: 60,
     paddingRight: 8,
   },
-  title: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
 })
 
 class Routes extends Component {

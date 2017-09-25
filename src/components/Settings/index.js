@@ -34,6 +34,8 @@ class Settings extends Component {
 
         <SettingsSection sectionTitle="Profile">
           <TextSetting label="Name" data="Henry Paulino" />
+          <TextSetting label="Username" data="corasan" />
+          <TextSetting label="Email" data="henrypl360@gmail.com" />
         </SettingsSection>
       </View>
     )

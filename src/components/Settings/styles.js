@@ -63,8 +63,6 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     borderBottomColor: BORDER_COLOR,
     borderBottomWidth: 1,
-    borderTopColor: BORDER_COLOR,
-    borderTopWidth: 1,
     paddingHorizontal: 30,
     alignItems: 'center',
     flexDirection: 'row',
@@ -80,6 +78,7 @@ export default StyleSheet.create({
     color: TINT,
     fontFamily: IOS_FONT,
     backgroundColor: 'transparent',
-    left: 60,
+    position: 'absolute',
+    left: 150,
   },
 })
