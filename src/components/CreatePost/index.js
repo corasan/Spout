@@ -40,7 +40,7 @@ class CreatePost extends Component {
     this.getSession().done()
   }
 
-  getSession = () => {
+  getSession = async () => {
     try {
       const userSession = await AsyncStorage.getItem('UserSession')
       if (userSession) {
