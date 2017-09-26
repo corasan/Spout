@@ -1,11 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { EditView } from '../EditView'
+import { EditView, EditInput } from '../EditView'
 
 const ChangeName = () => (
-  <View>
-    <EditView pageName="Henry Paulino" />
-  </View>
+  <EditView pageName="Henry Paulino">
+    <EditInput placeholder="First Name" />
+    <EditInput placeholder="Last Name" />
+  </EditView>
 )
 
 export default ChangeName
