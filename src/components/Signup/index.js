@@ -10,15 +10,12 @@ const { height } = Dimensions.get('window')
 
 // TODO: make my own Text component with default font
 class Signup extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      username: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      password: '',
-    }
+  state = {
+    username: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
   }
 
   signup = () => {
