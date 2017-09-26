@@ -17,13 +17,17 @@ class Login extends Component {
     }
   }
 
-  componentWillMount() {
-    StatusBar.setBarStyle('light-content', true)
-    AsyncStorage.getItem('UserSession', (err, data) => {
-      if (data) {
-        Actions.replace('main')
-      }
-    })
+  componentDidMount() {
+    this.getSession().done()
+  }
+
+  getSession = async () => {
+    try {
+      const session = await AsyncStorage.getItem('UserSession')
+      session && Actions.replace('main')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   login = () => {
