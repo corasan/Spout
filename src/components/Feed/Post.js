@@ -25,7 +25,7 @@ class Post extends Component {
     this.likes = this.props.post.node.agrees.edges
   }
 
-  componentWillMount() {
+  componentDidMount() {
     AsyncStorage.getItem('UserSession', (err, data) => {
       if (data) {
         const session = JSON.parse(data)

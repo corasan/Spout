@@ -36,15 +36,20 @@ class CreatePost extends Component {
     }
   }
 
-  componentWillMount() {
-    AsyncStorage.getItem('UserSession', (err, data) => {
-      if (data) {
-        const user = JSON.parse(data)
-        this.setState({ author: user.uid, username: user.username })
-      } else {
-        console.error(err)
+  componentDidMount() {
+    this.getSession().done()
+  }
+
+  getSession = () => {
+    try {
+      const userSession = await AsyncStorage.getItem('UserSession')
+      if (userSession) {
+        const session = JSON.parse(userSession)
+        this.setState({ author: session.uid, username: session.username })
       }
-    })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderCharactersLeft = () => {

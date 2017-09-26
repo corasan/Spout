@@ -39,8 +39,10 @@ class Profile extends Component {
   getUserID = async () => {
     try {
       const data = await AsyncStorage.getItem('UserSession')
-      const user = JSON.parse(data)
-      user && this.setState({ uid: user.uid })
+      if (data) {
+        const user = JSON.parse(data)
+        this.setState({ uid: user.uid })
+      }
     } catch (error) {
       console.log(error)
     }
