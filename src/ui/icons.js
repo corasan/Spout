@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { MAIN, LIGHT_TEXT, TINT, DARKER_GRAY } from './theme'
 
 export class CreatePostIcon extends Component {
@@ -41,4 +42,12 @@ export const SavePostIcon = () => (
 
 export const EraseAllIcon = () => (
   <Ionicons name="ios-backspace-outline" size={30} color={MAIN} />
+)
+
+export const EditIcon = () => (
+  <EvilIcons name="chevron-right" size={42} color={DARKER_GRAY} />
+)
+
+export const BackIcon = () => (
+  <EvilIcons name="chevron-left" size={46} color={TINT} />
 )
