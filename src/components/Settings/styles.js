@@ -83,6 +83,16 @@ export default StyleSheet.create({
   },
   // EditView styles
   topBar: {
-    height: 55,
+    height: 70,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    paddingTop: 28,
+    flexDirection: 'row',
+    marginBottom: 40,
+  },
+  pageName: {
+    fontSize: 20,
+    fontFamily: IOS_FONT,
+    color: TINT,
   },
 })

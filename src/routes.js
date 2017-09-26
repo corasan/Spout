@@ -10,6 +10,7 @@ import Signup from './components/Signup/'
 import Feed from './components/Feed'
 import Main from './components/Main'
 import CreatePost from './components/CreatePost'
+import ChangeName from './components/Settings/ChangeViews/ChangeName'
 
 
 const styles = StyleSheet.create({
@@ -57,17 +58,16 @@ class Routes extends Component {
           <Scene
             key="main"
             component={Main}
-            // title="Feed"
-            // titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
             hideBackImage
             renderRightButton={() => this.renderRightButton()}
           />
           <Scene
-            key="createPost"
-            component={CreatePost}
-            visible={this.state.createPostVisible}
-            direction="vertical"
+          key="createPost"
+          component={CreatePost}
+          visible={this.state.createPostVisible}
+          direction="vertical"
           />
+          <Scene key="changeName" component={ChangeName} />
         </Scene>
       </Router>
     )

@@ -47,3 +47,7 @@ export const EraseAllIcon = () => (
 export const EditIcon = () => (
   <EvilIcons name="chevron-right" size={42} color={DARKER_GRAY} />
 )
+
+export const BackIcon = () => (
+  <EvilIcons name="chevron-left" size={46} color={TINT} />
+)

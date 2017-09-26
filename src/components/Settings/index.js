@@ -33,7 +33,7 @@ class Settings extends Component {
         </View>
 
         <SettingsSection sectionTitle="Profile">
-          <EditSetting label="Name" data="Henry Paulino" />
+          <EditSetting label="Name" data="Henry Paulino" goTo={() => Actions.changeName()} />
           <EditSetting label="Username" data="corasan" />
           <EditSetting label="Email" data="henrypl360@gmail.com" />
         </SettingsSection>
