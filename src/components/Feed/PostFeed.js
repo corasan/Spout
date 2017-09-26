@@ -11,11 +11,8 @@ import { DARKER_GRAY, TINT } from '../../ui/theme'
 import styles from './styles'
 
 class PostFeed extends Component {
-  constructor() {
-    super()
-    this.state = {
-      createPostVisible: false,
-    }
+  state = {
+    createPostVisible: false,
   }
   
   render() {
