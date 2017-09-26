@@ -32,13 +32,18 @@ class Profile extends Component {
     }
   }
 
-  componentWillMount() {
-    AsyncStorage.getItem('UserSession', (error, data) => {
+  componentDidMount() {
+    this.getUserID().done()
+  }
+
+  getUserID = async () => {
+    try {
+      const data = await AsyncStorage.getItem('UserSession')
       const user = JSON.parse(data)
-      if (user) {
-        this.setState({ uid: user.uid })
-      }
-    })
+      user && this.setState({ uid: user.uid })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderProfile = (props) => {

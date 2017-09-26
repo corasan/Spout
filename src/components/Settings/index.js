@@ -17,10 +17,8 @@ class Settings extends Component {
   loadUserData = async () => {
     try {
       const user = await AsyncStorage.getItem('UserProfile')
-      if (user !== null) {
-        this.setState({ user: JSON.parse(user) })
-      }
-    } catch(error) {
+      user && this.setState({ user: JSON.parse(user) })
+    } catch (error) {
       console.log(error)
     }
   }
