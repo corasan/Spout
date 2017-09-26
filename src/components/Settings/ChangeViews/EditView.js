@@ -7,11 +7,8 @@ import { BackIcon } from '../../../ui/icons'
 import styles from './styles'
 
 export class EditInput extends Component {
-  constructor() {
-    super()
-    this.state = {
-      input: ''
-    }
+  state = {
+    input: ''
   }
 
   render() {

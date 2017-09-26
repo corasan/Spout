@@ -22,11 +22,8 @@ export const EditSetting = (props) => (
 )
 
 export class SwitchSetting extends Component {
-  constructor() {
-    super()
-    this.state = {
-      switchOn: true,
-    }
+  state = {
+    switchOn: true,
   }
 
   render() {
