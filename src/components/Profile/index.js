@@ -24,12 +24,9 @@ const ProfileQuery = graphql`
 `
 
 class Profile extends Component {
-  constructor() {
-    super()
-    this.state = {
-      uid: '',
-      currentTab: 0,
-    }
+  state = {
+    uid: '',
+    currentTab: 0,
   }
 
   componentDidMount() {
