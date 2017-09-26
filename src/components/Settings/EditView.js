@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import PropTypes from 'prop-types'
 import { BackIcon } from '../../ui/icons'
-
 
 import styles from './styles'
 
@@ -43,3 +43,23 @@ export const EditView = (props) => (
     </TouchableOpacity>
   </View>
 )
+
+EditView.propTypes = {
+  pageName: PropTypes.string.isRequired,
+  children: (props, propName, componentName) => {
+    const prop = props[propName]
+    React.Children.forEach(prop, (child) => {
+      if (child.type !== EditInput) {
+        return new Error(`${componentName} children should be of type EditInput`)
+      }
+    })
+  }
+}
+
+EditInput.propTypes = {
+  placeholder: PropTypes.string
+}
+
+EditInput.defaultProps = {
+  placeholder: "Placeholder"
+}
