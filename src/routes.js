@@ -11,7 +11,8 @@ import Feed from './components/Feed'
 import Main from './components/Main'
 import CreatePost from './components/CreatePost'
 import ChangeName from './components/Settings/ChangeViews/ChangeName'
-
+import ChangeUsername from './components/Settings/ChangeViews/ChangeUsername'
+import ChangeEmail from './components/Settings/ChangeViews/ChangeEmail'
 
 const styles = StyleSheet.create({
   navBar: {
@@ -68,6 +69,8 @@ class Routes extends Component {
           direction="vertical"
           />
           <Scene key="changeName" component={ChangeName} />
+          <Scene key="changeUsername" component={ChangeUsername} />
+          <Scene key="changeEmail" component={ChangeEmail} />
         </Scene>
       </Router>
     )

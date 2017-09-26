@@ -34,8 +34,8 @@ class Settings extends Component {
 
         <SettingsSection sectionTitle="Profile">
           <EditSetting label="Name" data="Henry Paulino" goTo={() => Actions.changeName()} />
-          <EditSetting label="Username" data="corasan" />
-          <EditSetting label="Email" data="henrypl360@gmail.com" />
+          <EditSetting label="Username" data="corasan" goTo={() => Actions.changeUsername()} />
+          <EditSetting label="Email" data="henrypl360@gmail.com" goTo={() => Actions.changeEmail()} />
         </SettingsSection>
       </View>
     )
