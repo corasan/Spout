@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { View, TextInput, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import CreateUser from '../../mutations/CreateUserMutation'
