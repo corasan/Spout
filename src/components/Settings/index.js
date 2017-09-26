@@ -6,7 +6,29 @@ import { EditSetting, SettingsSection, SwitchSetting } from './SettingsComponent
 import styles from './styles'
 
 class Settings extends Component {
+  state = {
+    user: {}
+  }
+
+  componentDidMount() {
+    this.loadUserData().done()
+  }
+
+  loadUserData = async () => {
+    try {
+      const user = await AsyncStorage.getItem('UserProfile')
+      if (user !== null) {
+        this.setState({ user: JSON.parse(user) })
+      }
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   render() {
+    const user = this.state.user
+    const name = `${user.firstname} ${user.lastname}`
+
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.userArea}>
@@ -16,13 +38,12 @@ class Settings extends Component {
             <View style={styles.userPicCircle} />
 
             <View style={{ marginLeft: 25 }}>
-              <Text style={styles.name}>Henry Paulino</Text>
-              <Text style={styles.username}>@corasan</Text>
+              <Text style={styles.name}>{name}</Text>
+              <Text style={styles.username}>{user.username}</Text>
 
-              <TouchableOpacity onPress={() => {
-                AsyncStorage.removeItem('UserSession', (error) => {
-                    if (!error) Actions.login()
-                  })
+              <TouchableOpacity
+                onPress={() => {
+                  AsyncStorage.removeItem('UserSession', (error) => !error && Actions.login())
                 }}
                 style={styles.logoutBtn}
               >
@@ -33,9 +54,9 @@ class Settings extends Component {
         </View>
 
         <SettingsSection sectionTitle="Profile">
-          <EditSetting label="Name" data="Henry Paulino" goTo={() => Actions.changeName()} />
-          <EditSetting label="Username" data="corasan" goTo={() => Actions.changeUsername()} />
-          <EditSetting label="Email" data="henrypl360@gmail.com" goTo={() => Actions.changeEmail()} />
+          <EditSetting label="Name" data={name} goTo={() => Actions.changeName()} />
+          <EditSetting label="Username" data={user.username} goTo={() => Actions.changeUsername()} />
+          <EditSetting label="Email" data={user.email} goTo={() => Actions.changeEmail()} />
         </SettingsSection>
 
         <SettingsSection sectionTitle="App">
@@ -46,5 +67,5 @@ class Settings extends Component {
   }
 }
   
-  export default Settings
+export default Settings
   

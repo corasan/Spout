@@ -55,11 +55,12 @@ export const SettingsSection = (props) => (
 EditSetting.propTypes = {
   goTo: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  data: PropTypes.string.isRequired,
+  data: PropTypes.string,
 }
 
 EditSetting.defaultProps = {
-  goTo: () => console.log('goTo pressed')
+  goTo: () => console.log('goTo pressed'),
+  data: '',
 }
 
 SettingsSection.propTypes = {
@@ -70,5 +71,5 @@ SettingsSection.propTypes = {
         return new Error(`${componentName} children should be of type EditSetting`)
       }
     })
-  }
+  },
 }
