@@ -9,14 +9,11 @@ import styles from './styles'
 const { height } = Dimensions.get('window')
 
 class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      password: '',
-    }
+  state = {
+    email: '',
+    password: '',
   }
-
+  
   componentDidMount() {
     this.getSession().done()
   }
