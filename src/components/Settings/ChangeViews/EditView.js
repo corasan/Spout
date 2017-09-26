@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import PropTypes from 'prop-types'
-import { BackIcon } from '../../ui/icons'
+import { BackIcon } from '../../../ui/icons'
 
 import styles from './styles'
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, Dimensions, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, Dimensions, TouchableOpacity, Switch } from 'react-native'
 import PropTypes from 'prop-types'
 import { EditIcon } from '../../ui/icons'
 
@@ -20,6 +20,29 @@ export const EditSetting = (props) => (
     </View>
   </TouchableOpacity>
 )
+
+export class SwitchSetting extends Component {
+  constructor() {
+    super()
+    this.state = {
+      switchOn: true,
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.switch}>
+        <Text style={styles.settingOptionLabel}>{this.props.label}</Text>
+
+        <Switch
+          onValueChange={(switchOn) => this.setState({ switchOn })}
+          value={this.state.switchOn}
+          style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+        />
+      </View>
+    )
+  }
+}
 
 export const SettingsSection = (props) => (
   <View style={styles.settingsSection}>
@@ -43,7 +66,7 @@ SettingsSection.propTypes = {
   children: (props, propName, componentName) => {
     const prop = props[propName]
     React.Children.forEach(prop, (child) => {
-      if (child.type !== EditSetting) {
+      if (child.type !== EditSetting || SwitchSetting) {
         return new Error(`${componentName} children should be of type EditSetting`)
       }
     })

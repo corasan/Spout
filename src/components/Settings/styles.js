@@ -80,42 +80,17 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     position: 'absolute',
     left: 150,
-  },
-  // EditView styles
-  topBar: {
-    height: 70,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    paddingTop: 28,
-    flexDirection: 'row',
-    marginBottom: 40,
-  },
-  pageName: {
-    fontSize: 20,
-    fontFamily: IOS_FONT,
-    color: TINT,
-  },
-  editInput: {
+  },  
+  // Switch styles
+  switch: {
     height: 55,
     backgroundColor: 'white',
-    paddingHorizontal: 26,
     borderBottomColor: BORDER_COLOR,
     borderBottomWidth: 1,
-    fontFamily: IOS_FONT,
-    fontSize: 20,
-    color: TINT,
-  },
-  saveBtn: {
-    backgroundColor: '#4BD964',
-    height: 55,
-    marginTop: 40,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  saveText: {
-    color: 'white',
-    fontSize: 20,
-    fontFamily: IOS_FONT,
-    fontWeight: 'bold',
+    paddingLeft: 30,
+    paddingRight: 10,
+    justifyContent: 'space-between',
   },
 })

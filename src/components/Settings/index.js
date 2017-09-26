@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { EditSetting, SettingsSection } from './Settings'
+import { EditSetting, SettingsSection, SwitchSetting } from './SettingsComponents'
 
 import styles from './styles'
 
@@ -36,6 +36,10 @@ class Settings extends Component {
           <EditSetting label="Name" data="Henry Paulino" goTo={() => Actions.changeName()} />
           <EditSetting label="Username" data="corasan" goTo={() => Actions.changeUsername()} />
           <EditSetting label="Email" data="henrypl360@gmail.com" goTo={() => Actions.changeEmail()} />
+        </SettingsSection>
+
+        <SettingsSection sectionTitle="App">
+          <SwitchSetting label="Notifications" />
         </SettingsSection>
       </View>
     )
