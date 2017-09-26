@@ -26,14 +26,11 @@ class CreatePost extends Component {
     createPostVisible: PropTypes.bool.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      content: '',
-      createPostVisible: this.props.createPostVisible,
-      author: '',
-      username: ''
-    }
+  state = {
+    content: '',
+    createPostVisible: this.props.createPostVisible,
+    author: '',
+    username: ''
   }
 
   componentDidMount() {
