@@ -22,25 +22,29 @@ class Post extends Component {
       likePressed: false,
       currentLike: '',
     }
-    this.likes = this.props.post.node.agrees.edges
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('UserSession', (err, data) => {
-      if (data) {
-        const session = JSON.parse(data)
-        this.setState({ uid: session.uid})
-      }
-    }).then(() => {
-      _.each(this.likes, (agree) => {
-        if (_.includes(agree.node.user, this.state.uid)) {
-          this.setState({
-            likePressed: true,
-            currentLike: agree.node.id,
-          })
-        } 
-      })
-    })
+    this.validateLikes().done()
+  }
+  
+  validateLikes = async () => {
+    const likes = this.props.post.node.agrees.edges
+    try {
+      const userSession = await AsyncStorage.getItem('UserSession')
+      const user = JSON.parse(userSession)
+
+      if (user) {
+        this.setState({ uid: user.uid })
+        _.each(likes, (agree) => {
+          if (_.includes(agree.node.user, user.uid)) {
+            this.setState({ likePressed: true, currentLike: agree.node.id })
+          }
+        })
+      }    
+    } catch (error) {
+      console.log(`ValidateLike Error: ${error}`)
+    }
   }
 
   // renderDeletePost = (uid) => {
@@ -63,9 +67,7 @@ class Post extends Component {
   handleLikeButton = (postId) => {
     if (!this.state.likePressed) {
       CreateAgree(postId, this.state.uid, this.state.currentDisagree)
-      this.setState({
-        likePressed: !this.state.likePressed,
-      })
+      this.setState({ likePressed: !this.state.likePressed })
     }
   }
 
@@ -108,7 +110,14 @@ class Post extends Component {
 
   render() {
     const post = this.props.post.node
-    const peopleCount = post.agrees.count === 1 ? 'person likes' : 'people like'
+    let peopleCount = ''
+    
+    if (post.agrees.count === 1) {
+      peopleCount = `${post.agrees.count} person likes this`
+    } else if (post.agrees.count > 1) {
+      peopleCount = `${post.agrees.count} people like this`
+    }
+
     return (
       // <MenuContext>
       <View style={styles.postBox}>
@@ -135,7 +144,7 @@ class Post extends Component {
                 {this.renderLikeIcon()}
               </TouchableOpacity>
               <Text style={styles.iconPostText}>
-                {`${post.agrees.count} ${peopleCount} this`}
+                {`${peopleCount}`}
               </Text>
             </View>
 
