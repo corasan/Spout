@@ -6,23 +6,15 @@ import { BackIcon } from '../../../ui/icons'
 
 import styles from './styles'
 
-export class EditInput extends Component {
-  state = {
-    input: ''
-  }
-
-  render() {
-    return (
-      <TextInput
-        placeholder={this.props.placeholder}
-        value={this.state.input}
-        onChangeText={(input) => this.setState({ input })}
-        style={styles.editInput}
-        placeholderTextColor="#95989A"          
-      />
-    )
-  }
-}
+export const EditInput = (props) => (
+  <TextInput
+    placeholder={props.placeholder}
+    value={props.input}
+    onChangeText={props.onChangeText}
+    style={styles.editInput}
+    placeholderTextColor="#95989A"          
+  />
+)
 
 export const EditView = (props) => (
   <View style={{ flex: 1 }}>
@@ -35,7 +27,7 @@ export const EditView = (props) => (
 
     {props.children}
 
-    <TouchableOpacity style={styles.saveBtn}>
+    <TouchableOpacity style={styles.saveBtn} onPress={props.onSubmit}>
       <Text style={styles.saveText}>Save</Text>
     </TouchableOpacity>
   </View>
@@ -44,13 +36,13 @@ export const EditView = (props) => (
 EditView.propTypes = {
   pageName: PropTypes.string.isRequired,
   children: (props, propName, componentName) => {
-    const prop = props[propName]
-    React.Children.forEach(prop, (child) => {
+    React.Children.forEach(props[propName], (child) => {
       if (child.type !== EditInput) {
         return new Error(`${componentName} children should be of type EditInput`)
       }
     })
-  }
+  },
+  onSubmit: PropTypes.func.isRequired,
 }
 
 EditInput.propTypes = {
