@@ -19,8 +19,8 @@ class ChangeName extends Component {
   getSession = async () => {
     try {
       const userProfile = await AsyncStorage.getItem('UserProfile')
-      const { uid, firstname, lastname } = JSON.parse(userProfile)
-      this.setState({ uid, fullName: `${firstname} ${lastname}` })
+      const { uid } = JSON.parse(userProfile)
+      this.setState({ uid })
     } catch (error) {
       console.log(error)
     }
@@ -40,7 +40,7 @@ class ChangeName extends Component {
 
   render() {
     return (
-      <EditView pageName={this.state.fullName} onSubmit={() => this.handleNameChange()}>
+      <EditView pageName={this.props.pageName} onSubmit={() => this.handleNameChange()}>
         <EditInput
           placeholder="First Name"
           input={this.state.firstname}

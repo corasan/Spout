@@ -33,7 +33,7 @@ class ChangeUsername extends Component {
 
   render() {
     return (
-      <EditView pageName="corasan" onSubmit={() => this.handleUsernameChange()}>
+      <EditView pageName={this.props.pageName} onSubmit={() => this.handleUsernameChange()}>
         <EditInput
           placeholder="Username"
           input={this.state.username}
