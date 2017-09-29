@@ -32,7 +32,8 @@ export default (id, username: string) => {
         AlertIOS.alert(
           'Settings',
           'Username has been changed',
-          [{ text: 'Ok', onPress: () => Actions.pop() }])
+          [{ text: 'Ok', onPress: () => Actions.pop() }]
+        )
       },
       onError: (error) => console.error(error)
     },
