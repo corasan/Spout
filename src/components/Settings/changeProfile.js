@@ -3,6 +3,10 @@ import { AsyncStorage } from 'react-native'
 
 const changeProfile = (WrappedComponent, handleOnSubmit) => {
   return class extends Component {
+    state = {
+      uid: '',
+    }
+
     componentDidMount() {
       this.getProfile().done()
     }
@@ -18,7 +22,9 @@ const changeProfile = (WrappedComponent, handleOnSubmit) => {
     }
 
     render() {
-      return <WrappedComponent handleOnSubmit={() => handleOnSubmit()} {...this.props} /> 
+      return (
+        <WrappedComponent uid={this.state.uid} {...this.props} /> 
+      )
     }
   }
 }

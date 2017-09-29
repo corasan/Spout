@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { EditView, EditInput } from './EditView'
-import changeProfile from './changeProfile'
+import changeProfile from '../changeProfile'
 
 class ChangeEmail extends Component {
   state = {
@@ -10,7 +10,7 @@ class ChangeEmail extends Component {
 
   render() {
     return (
-      <EditView pageName={this.props.pageName} onSubmit={this.props.handleOnSubmit}>
+      <EditView pageName={this.props.pageName} onSubmit={() => console.log('email changed')}>
         <EditInput
           placeholder="Email"
           input={this.state.email}
@@ -22,4 +22,4 @@ class ChangeEmail extends Component {
 }
 
 
-export default changeProfile(ChangeEmail, () => console.log('email changed'))
+export default changeProfile(ChangeEmail)
