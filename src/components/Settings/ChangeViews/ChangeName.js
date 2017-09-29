@@ -29,6 +29,7 @@ class ChangeName extends Component {
   handleNameChange = () => {
     if (this.state.firstname === '' && this.state.lastname === '') {
       AlertIOS.alert(
+        'Settings',
         `You must enter a new First/Last name to save changes, or enter your old First/Last name if you want to change it.`
       )
     } else {
