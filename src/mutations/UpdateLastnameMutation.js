@@ -28,7 +28,7 @@ export default (id, lastname: string) => {
       mutation,
       variables,
       onCompleted: (response) => {
-         console.log('lastname updated')
+        console.log('lastname updated')
       },
       onError: (error) => console.error(error)
     },

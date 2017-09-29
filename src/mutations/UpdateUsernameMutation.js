@@ -4,20 +4,20 @@ import { AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 const mutation = graphql`
-  mutation UpdateFirstnameMutation($input: UpdateUserInput!) {
+  mutation UpdateUsernameMutation($input: UpdateUserInput!) {
     updateUser(input: $input) {
       user {
-        firstname
+        username
       }
     }
   }
 `
 
-export default (id, firstname: string) => {
+export default (id, username: string) => {
   const variables = {
     input: {
       id,
-      firstname,
+      username,
       clientMutationId: '',
     },
   }
@@ -28,7 +28,7 @@ export default (id, firstname: string) => {
       mutation,
       variables,
       onCompleted: (response) => {
-        console.log('firstname updated')
+        console.log('username updated', response)
       },
       onError: (error) => console.error(error)
     },
