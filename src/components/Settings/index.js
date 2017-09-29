@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, AsyncStorage, Dimensions, AlertIOS } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { EditSetting, SettingsSection, SwitchSetting } from './SettingsComponents'
 
@@ -65,7 +65,7 @@ class Settings extends Component {
           <EditSetting
             label="Email"
             data={user.email}
-            goTo={() => Actions.changeEmail({ pageName: user.email })}
+            goTo={() => AlertIOS.alert('Settings', 'Can\'t change email')}
           />
         </SettingsSection>
 
