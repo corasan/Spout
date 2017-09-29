@@ -28,7 +28,7 @@ export default (id, firstname: string) => {
       mutation,
       variables,
       onCompleted: (response) => {
-        console.log('firstname updated')
+        AsyncStorage.mergeItem('UserProfile', JSON.stringify(response.updateUser.user))
       },
       onError: (error) => console.error(error)
     },
