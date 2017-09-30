@@ -10,6 +10,7 @@ import {
   SavePostIcon,
 } from '../../ui/icons'
 import CreateAgree from '../../mutations/CreateAgreeMutation'
+import DeleteAgree from '../../mutations/DeleteAgreeMutation'
 
 import styles from './styles'
 
@@ -63,8 +64,11 @@ class Post extends Component {
 
   handleLikeButton = (postId) => {
     if (!this.state.likePressed) {
-      CreateAgree(postId, this.state.uid, this.state.currentDisagree)
-      this.setState({ likePressed: !this.state.likePressed })
+      CreateAgree(postId, this.state.uid)
+      this.setState({ likePressed: true })
+    } else {
+      DeleteAgree(this.state.currentLike)
+      this.setState({ likePressed: false })
     }
   }
 
