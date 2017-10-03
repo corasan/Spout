@@ -32,7 +32,7 @@ export class SwitchSetting extends Component {
         <Text style={styles.settingOptionLabel}>{this.props.label}</Text>
 
         <Switch
-          onValueChange={(switchOn) => this.setState({ switchOn })}
+          onValueChange={switchOn => this.setState({ switchOn })}
           value={this.state.switchOn}
           style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
           disabled
