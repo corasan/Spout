@@ -22,17 +22,6 @@ export default graphql`
                 }
               }
             }
-            disagrees {
-              count
-              edges {
-                node {
-                  id
-                  user {
-                    id
-                  }
-                }
-              }
-            }
           }
         }
       }

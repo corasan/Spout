@@ -1,6 +1,5 @@
 import { commitMutation, graphql } from 'react-relay'
 import environment from '../Environment'
-import DeleteDisagree from './DeleteDisagreeMutation'
 
 const mutation = graphql`
   mutation CreateAgreeMutation($input: CreateAgreeInput!) {
@@ -12,7 +11,7 @@ const mutation = graphql`
   }
 `
 
-export default (postId: string, userId: string, disagreeId) => {
+export default (postId: string, userId: string) => {
   const variables = {
     input: {
       postId,
@@ -25,10 +24,7 @@ export default (postId: string, userId: string, disagreeId) => {
     {
       mutation,
       variables,
-      onCompleted: (response) => {
-        console.log(response)
-        DeleteDisagree(disagreeId)
-      },
+      onCompleted: response => console.log(response),
       onError: err => console.error(err)
     },
   )

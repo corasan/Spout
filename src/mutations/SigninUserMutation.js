@@ -3,8 +3,12 @@ import environment from '../Environment'
 import { AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
-const saveUserData = (uid, token) => {
-  AsyncStorage.setItem('UserSession', JSON.stringify({ uid, token }))
+const saveUserSession = (uid, username, token) => {
+  AsyncStorage.setItem('UserSession', JSON.stringify({ uid, username, token }))
+}
+
+const saveUserProfile = (uid, firstname, lastname, email, username) => {
+  AsyncStorage.setItem('UserProfile', JSON.stringify({ uid, firstname, lastname, email, username }))
 }
 
 const mutation = graphql`
@@ -13,6 +17,10 @@ const mutation = graphql`
       token
       user {
         id
+        username
+        firstname
+        lastname
+        email
       }
     }
   }
@@ -38,7 +46,15 @@ export default (
       mutation,
       variables,
       onCompleted: (response) => {
-        saveUserData(response.signinUser.user.id, response.signinUser.token)
+        const data = response.signinUser
+        saveUserSession(data.user.id, data.user.username, data.token)
+        saveUserProfile(
+          data.user.id,
+          data.user.firstname,
+          data.user.lastname,
+          data.user.email,
+          data.user.username
+        )
         Actions.replace('main')
       },
       onError: err => console.error(err),

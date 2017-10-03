@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { View, Text, AsyncStorage } from 'react-native'
 import { graphql, QueryRenderer } from 'react-relay'
 import AnimatedTabs from 'rn-animated-tabs';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
 import environment from '../../Environment'
-import UserDetails from './UserDetails'
 import MyPosts from './MyPosts'
 import SavedPosts from './SavedPosts'
+import { DARKER_GRAY, TINT } from '../../ui/theme'
 
 import styles from './styles'
 
@@ -23,41 +24,54 @@ const ProfileQuery = graphql`
 `
 
 class Profile extends Component {
-  constructor() {
-    super()
-    this.state = {
-      uid: '',
-      currentTab: 0,
-    }
+  state = {
+    uid: '',
+    currentTab: 0,
   }
 
-  componentWillMount() {
-    AsyncStorage.getItem('UserSession', (error, data) => {
-      const user = JSON.parse(data)
-      if (user) {
+  componentDidMount() {
+    this.getUserID().done()
+  }
+
+  getUserID = async () => {
+    try {
+      const data = await AsyncStorage.getItem('UserSession')
+      if (data) {
+        const user = JSON.parse(data)
         this.setState({ uid: user.uid })
       }
-    })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderProfile = (props) => {
     const user = props.viewer.User
-    const tabContent = [
-      <SavedPosts uid={this.state.uid} />,
-      <MyPosts uid={this.state.uid} />
-    ]
-
     return (
       <View style={styles.container}>
-        <UserDetails user={user}/>
-        <AnimatedTabs
-          tabTitles={['Saved Posts', 'My Posts']}
-          onChangeTab={(currentTab) => this.setState({ currentTab })}
-          activeTabIndicatorColor='#1ABC9C'
-          containerStyle={styles.tabContainerStyle}
-          tabTextStyle={{ fontFamily: 'Chalkboard SE' }}
-        />
-        {tabContent[this.state.currentTab]}
+        <View>
+          <View style={styles.user}>
+            <View style={styles.namesArea}>
+              <Text style={styles.name}>{`${user.firstname} ${user.lastname}`}</Text>
+              <Text style={styles.username}>{`@${user.username}`}</Text>
+            </View>
+          </View>
+        </View>
+
+        <ScrollableTabView
+          renderTabBar={() => (
+            <DefaultTabBar
+              style={styles.tabStyle}
+            />
+          )}
+          tabBarInactiveTextColor={DARKER_GRAY}
+          tabBarActiveTextColor={TINT}
+          tabBarTextStyle={styles.tabBarTextStyle}
+          tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
+        >
+          <SavedPosts uid={this.state.uid} tabLabel="Saved" />
+          <MyPosts tabLabel="Posted" />
+        </ScrollableTabView>
       </View>
     )
   }

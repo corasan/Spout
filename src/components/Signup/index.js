@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { View, TextInput, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import CreateUser from '../../mutations/CreateUserMutation'
@@ -10,15 +9,12 @@ const { height } = Dimensions.get('window')
 
 // TODO: make my own Text component with default font
 class Signup extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      username: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      password: '',
-    }
+  state = {
+    username: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
   }
 
   signup = () => {

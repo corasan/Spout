@@ -10,7 +10,9 @@ import Signup from './components/Signup/'
 import Feed from './components/Feed'
 import Main from './components/Main'
 import CreatePost from './components/CreatePost'
-
+import ChangeName from './components/Settings/ChangeViews/ChangeName'
+import ChangeUsername from './components/Settings/ChangeViews/ChangeUsername'
+import ChangeEmail from './components/Settings/ChangeViews/ChangeEmail'
 
 const styles = StyleSheet.create({
   navBar: {
@@ -19,11 +21,6 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0, 0, 0, 0.15)',
     height: 60,
     paddingRight: 8,
-  },
-  title: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 20,
   },
 })
 
@@ -54,27 +51,26 @@ class Routes extends Component {
       <Router
         navigationBarStyle={styles.navBar}
         titleStyle={styles.title}
-        sceneStyle={{ backgroundColor: BACKGROUND_GRAY }}
+        sceneStyle={{ backgroundColor: '#F7F7F7' }}
       >
-        <Scene key="root">
-          <Scene key="login" component={Login} hideNavBar />
-          <Scene key="signup" component={Signup} hideNavBar />
+        <Scene key="root" hideNavBar>
+          <Scene key="login" component={Login} />
+          <Scene key="signup" component={Signup} />
           <Scene
             key="main"
             component={Main}
-            hideNavBar={false}
-            // title="Feed"
-            titleStyle={{ fontFamily: 'ChalkboardSE-Bold', color: TINT, marginBottom: 2 }}
             hideBackImage
             renderRightButton={() => this.renderRightButton()}
           />
           <Scene
-            key="createPost"
-            component={CreatePost}
-            visible={this.state.createPostVisible}
-            hideNavBar
-            direction="vertical"
+          key="createPost"
+          component={CreatePost}
+          visible={this.state.createPostVisible}
+          direction="vertical"
           />
+          <Scene key="changeName" component={ChangeName} />
+          <Scene key="changeUsername" component={ChangeUsername} />
+          <Scene key="changeEmail" component={ChangeEmail} />
         </Scene>
       </Router>
     )

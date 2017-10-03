@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native'
-import { MAIN, BACKGROUND_GRAY, IOS_FONT_BOLD, TINT, IOS_FONT } from '../../ui/theme'
+import { MAIN, BACKGROUND_GRAY, IOS_FONT_BOLD, TINT, IOS_FONT, BORDER_COLOR, LIGHT_TEXT } from '../../ui/theme'
 
 export default StyleSheet.create({
   createPostContainer: {
-    flex: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    marginTop: 100,
+    marginTop: 50,
+  },
+  username: {
+    top: 34,
+    fontSize: 24,
+    color: MAIN,
+    marginLeft: 16,
+    fontFamily: IOS_FONT,
+    backgroundColor: 'transparent',
   },
   closeModalIcon: {
     height: 30,
@@ -20,39 +24,48 @@ export default StyleSheet.create({
     top: 32,
   },
   postInput: {
-    height: 110,
-    borderRadius: 6,
-    padding: 6,
+    height: 383,
+    paddingHorizontal: 16,
+    paddingVertical: 6,
     fontSize: 16,
-    maxHeight: 200,
-    backgroundColor: BACKGROUND_GRAY,
+    maxHeight: 383,
+    backgroundColor: 'white',
     fontFamily: IOS_FONT,
-  },
-  tellTheWorld: {
-    fontSize: 30,
-    color: TINT,
-    fontFamily: IOS_FONT_BOLD,
-    marginBottom: 60,
-    textAlign: 'center',
   },
   charsLeft: {
     fontFamily: IOS_FONT,
     backgroundColor: 'transparent',
+    fontSize: 18,
+    marginRight: 30,
   },
   sendPostBtnContainer: {
     paddingHorizontal: 18,
     marginTop: 10,
   },
-  senPostBtn: {
+  sendPostBtn: {
     backgroundColor: MAIN,
     alignItems: 'center',
     paddingVertical: 9,
     paddingHorizontal: 14,
-    borderRadius: 4,
+    width: 100,
   },
   sendPostText: {
     color: '#FFF',
     fontFamily: IOS_FONT,
-    fontSize: 16,
+    fontSize: 20,
+  },
+  placeholderText: {
+    fontFamily: IOS_FONT,
+    color: TINT,
+    fontSize: 24,
+  },
+  postBarBox: {
+    bottom: 0,
+    position: 'absolute',
+    justifyContent: 'flex-end',
+    borderTopColor: BORDER_COLOR,
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })
