@@ -56,3 +56,5 @@ fastlane/screenshots
 graphcoolEndpoint.js
 project.graphcool
 __generated__
+*.jsbundle
+*.jsbundle.meta
