@@ -26,25 +26,27 @@ class CreatePost extends Component {
     createPostVisible: PropTypes.bool.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      content: '',
-      createPostVisible: this.props.createPostVisible,
-      author: '',
-      username: ''
-    }
+  state = {
+    content: '',
+    createPostVisible: this.props.createPostVisible,
+    author: '',
+    username: ''
   }
 
-  componentWillMount() {
-    AsyncStorage.getItem('UserSession', (err, data) => {
-      if (data) {
-        const user = JSON.parse(data)
-        this.setState({ author: user.uid, username: user.username })
-      } else {
-        console.error(err)
+  componentDidMount() {
+    this.getSession().done()
+  }
+
+  getSession = async () => {
+    try {
+      const userSession = await AsyncStorage.getItem('UserSession')
+      if (userSession) {
+        const session = JSON.parse(userSession)
+        this.setState({ author: session.uid, username: session.username })
       }
-    })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderCharactersLeft = () => {

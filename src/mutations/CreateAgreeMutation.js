@@ -11,7 +11,7 @@ const mutation = graphql`
   }
 `
 
-export default (postId: string, userId: string, disagreeId) => {
+export default (postId: string, userId: string) => {
   const variables = {
     input: {
       postId,

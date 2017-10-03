@@ -11,12 +11,8 @@ class RecentPostsList extends Component {
     posts: PropTypes.objectOf(PropTypes.array).isRequired,
   }
 
-  constructor(props) {
-    super(props)
-    StatusBar.setBarStyle('dark-content', true)
-    this.state = {
-      dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
-    }
+  state = {
+    dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
   }
 
   renderRow = post => (

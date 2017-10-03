@@ -7,8 +7,8 @@ const saveUserSession = (uid, username, token) => {
   AsyncStorage.setItem('UserSession', JSON.stringify({ uid, username, token }))
 }
 
-const saveUserProfile = (firstname, lastname, email, username) => {
-  AsyncStorage.setItem('UserProfile', JSON.stringify({ firstname, lastname, email, username }))
+const saveUserProfile = (uid, firstname, lastname, email, username) => {
+  AsyncStorage.setItem('UserProfile', JSON.stringify({ uid, firstname, lastname, email, username }))
 }
 
 const mutation = graphql`
@@ -49,6 +49,7 @@ export default (
         const data = response.signinUser
         saveUserSession(data.user.id, data.user.username, data.token)
         saveUserProfile(
+          data.user.id,
           data.user.firstname,
           data.user.lastname,
           data.user.email,

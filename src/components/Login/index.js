@@ -9,21 +9,22 @@ import styles from './styles'
 const { height } = Dimensions.get('window')
 
 class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      password: '',
-    }
+  state = {
+    email: '',
+    password: '',
+  }
+  
+  componentDidMount() {
+    this.getSession().done()
   }
 
-  componentWillMount() {
-    StatusBar.setBarStyle('light-content', true)
-    AsyncStorage.getItem('UserSession', (err, data) => {
-      if (data) {
-        Actions.replace('main')
-      }
-    })
+  getSession = async () => {
+    try {
+      const session = await AsyncStorage.getItem('UserSession')
+      session && Actions.replace('main')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   login = () => {

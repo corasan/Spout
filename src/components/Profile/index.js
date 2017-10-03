@@ -24,21 +24,25 @@ const ProfileQuery = graphql`
 `
 
 class Profile extends Component {
-  constructor() {
-    super()
-    this.state = {
-      uid: '',
-      currentTab: 0,
-    }
+  state = {
+    uid: '',
+    currentTab: 0,
   }
 
-  componentWillMount() {
-    AsyncStorage.getItem('UserSession', (error, data) => {
-      const user = JSON.parse(data)
-      if (user) {
+  componentDidMount() {
+    this.getUserID().done()
+  }
+
+  getUserID = async () => {
+    try {
+      const data = await AsyncStorage.getItem('UserSession')
+      if (data) {
+        const user = JSON.parse(data)
         this.setState({ uid: user.uid })
       }
-    })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderProfile = (props) => {

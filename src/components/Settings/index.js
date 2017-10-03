@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, AsyncStorage, Dimensions, AlertIOS } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { EditSetting, SettingsSection, SwitchSetting } from './SettingsComponents'
 
@@ -17,10 +17,8 @@ class Settings extends Component {
   loadUserData = async () => {
     try {
       const user = await AsyncStorage.getItem('UserProfile')
-      if (user !== null) {
-        this.setState({ user: JSON.parse(user) })
-      }
-    } catch(error) {
+      user && this.setState({ user: JSON.parse(user) })
+    } catch (error) {
       console.log(error)
     }
   }
@@ -54,9 +52,21 @@ class Settings extends Component {
         </View>
 
         <SettingsSection sectionTitle="Profile">
-          <EditSetting label="Name" data={name} goTo={() => Actions.changeName()} />
-          <EditSetting label="Username" data={user.username} goTo={() => Actions.changeUsername()} />
-          <EditSetting label="Email" data={user.email} goTo={() => Actions.changeEmail()} />
+          <EditSetting
+            label="Name"
+            data={name}
+            goTo={() => Actions.changeName({ pageName: name })}
+          />
+          <EditSetting
+            label="Username"
+            data={user.username}
+            goTo={() => Actions.changeUsername({ pageName: user.username })}
+          />
+          <EditSetting
+            label="Email"
+            data={user.email}
+            goTo={() => AlertIOS.alert('Settings', 'Can\'t change email')}
+          />
         </SettingsSection>
 
         <SettingsSection sectionTitle="App">
